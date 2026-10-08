@@ -16,7 +16,7 @@ export default function Nav() {
 
         <div className="hidden items-center gap-8 text-sm text-bone-muted md:flex">
           <a href="#zones" className="transition-colors hover:text-bone">
-            The 24 zones
+            The 12 lots
           </a>
           <a href="#how" className="transition-colors hover:text-bone">
             How it works
