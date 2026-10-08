@@ -7,16 +7,16 @@ export const TIER_PRICE: Record<Tier, number> = {
 };
 
 export const TIER_BLURB: Record<Tier, string> = {
-  Title: "The two largest, most photographed surfaces of the campaign. One brand each.",
-  Feature: "High-visibility placements seen in every photo, video and pass-by.",
+  Title: "The two largest, most photographed surfaces in the livery. One brand each.",
+  Feature: "High-visibility placements in every photo, video and pass-by.",
   Detail: "Finishing placements that complete the livery without clutter.",
 };
 
 export const AUCTION_CLOSE_ISO = "2027-01-26T23:59:59+05:30";
-export const FUND_GOAL_INR = 500000;
+// Verified at build time: 0 lots claimed. Live numbers only.
+export const LOTS_CLAIMED = 0;
+export const LOTS_TOTAL = 12;
 export const ALL_OR_NOTHING_INR = 250000;
-// Verified at build time: 0 accepted bids. Live numbers only.
-export const RAISED_INR = 0;
 export const BIDDER_DEPOSIT_INR = 2000;
 
 export type Zone = {
@@ -25,7 +25,7 @@ export type Zone = {
   where: string;
   size: string;
   tier: Tier;
-  /** marker coordinates on the zone map (svg viewBox 0 0 760 400) */
+  /** marker coordinates on the lot map (svg viewBox 0 0 760 400) */
   x: number;
   y: number;
 };
@@ -45,13 +45,11 @@ export const ZONES: Zone[] = [
   { id: "D5", name: "Tank Bag Rear Lip", where: "Rear lip of the tank bag", size: "8 × 3 cm", tier: "Detail", x: 430, y: 190 },
 ];
 
-export const availableCount = ZONES.length;
-
 export const waBidLink = (z: Zone) =>
   `https://wa.me/917737077479?text=${encodeURIComponent(
-    `Hi! I want to bid on Lot ${z.id} — ${z.name} (${z.where}, ${z.size}, opening ₹${TIER_PRICE[z.tier].toLocaleString("en-IN")}). I'm ready to place the ₹2,000 refundable bidder deposit.`
+    `Hi! I want to bid on Lot ${z.id} — ${z.name} (${z.where}, ${z.size}, opens ₹${TIER_PRICE[z.tier].toLocaleString("en-IN")}). Ready to place the ₹${BIDDER_DEPOSIT_INR.toLocaleString("en-IN")} refundable bidder deposit.`
   )}`;
 
 export const waGeneral = `https://wa.me/917737077479?text=${encodeURIComponent(
-  "Hi! I want to know more about the Continental 12 sponsorship auction."
+  "Hi! I want to know more about The Twelve livery auction."
 )}`;

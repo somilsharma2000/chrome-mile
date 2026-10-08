@@ -1,6 +1,6 @@
 import Reveal from "@/components/Reveal";
-import { ALL_OR_NOTHING_INR, BIDDER_DEPOSIT_INR } from "@/lib/zones";
-import { Gavel, Wallet, ShieldCheck } from "lucide-react";
+import { BIDDER_DEPOSIT_INR } from "@/lib/zones";
+import { Gavel, BadgeCheck, Route } from "lucide-react";
 
 export default function HowItWorks() {
   return (
@@ -11,7 +11,7 @@ export default function HowItWorks() {
             How it works
           </p>
           <h2 className="mt-3 font-display text-4xl tracking-wide text-bone sm:text-5xl">
-            BRANDS BUY THE BIKE. <span className="chrome-text">THE BIKE CARRIES THEM.</span>
+            A LIVERY WORTH <span className="chrome-text">TWELVE NAMES</span>
           </h2>
         </Reveal>
 
@@ -20,20 +20,20 @@ export default function HowItWorks() {
             {
               icon: Gavel,
               n: "01",
-              title: "Bid on a lot",
-              text: `Message your lot and amount on WhatsApp with a ₹${BIDDER_DEPOSIT_INR.toLocaleString("en-IN")} refundable deposit for a Bidder ID. Bids are confirmed personally and you're notified if outbid. Auction closes 26 January 2027 with a 5-minute soft close — no sniping.`,
+              title: "Claim your lot",
+              text: `A ₹${BIDDER_DEPOSIT_INR.toLocaleString("en-IN")} refundable deposit gets you a Bidder ID. Bid on WhatsApp, confirmed the same day, notified instantly if you're outbid. Bidding closes 26 January 2027 with a 5-minute soft close — no sniping, no games.`,
             },
             {
-              icon: Wallet,
+              icon: BadgeCheck,
               n: "02",
-              title: "All-or-nothing, then the machine",
-              text: `The campaign proceeds only if at least ₹${ALL_OR_NOTHING_INR.toLocaleString("en-IN")} is committed by close — otherwise every rupee is auto-refunded. If the threshold passes, the GT 650 Mr. Clean is bought and winners pay 30% on award, 70% after verified installation.`,
+              title: "Full livery or no livery",
+              text: "The GT 650 ships only when all twelve lots are sold — a half-stickered machine is nobody's campaign. If any lot is unsold at close, the auction voids and every payment and deposit is returned in full. Complete, or nothing.",
             },
             {
-              icon: ShieldCheck,
+              icon: Route,
               n: "03",
               title: "Your mark rides, with proof",
-              text: "Your decal is installed on the exact lot. Every tour is GPS-logged; you receive ride certificates, photos of your mark on the road, and usage rights for your own marketing.",
+              text: "Your logo is installed at the exact position and size listed. Every tour is GPS-logged: ride certificates, install photography, and full usage rights to the imagery for your own marketing.",
             },
           ].map((s, i) => (
             <Reveal key={s.title} delay={i * 0.07}>

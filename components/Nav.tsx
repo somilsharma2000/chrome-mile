@@ -10,7 +10,7 @@ export default function Nav() {
             12
           </span>
           <span className="font-display text-xl tracking-widest2 text-bone">
-            CONTINENTAL <span className="text-accent">12</span>
+            THE <span className="text-accent">TWELVE</span>
           </span>
         </a>
 
@@ -22,7 +22,7 @@ export default function Nav() {
             How it works
           </a>
           <a href="#kit" className="transition-colors hover:text-bone">
-            Sponsor kit
+            What winners get
           </a>
           <a href="#faq" className="transition-colors hover:text-bone">
             FAQ

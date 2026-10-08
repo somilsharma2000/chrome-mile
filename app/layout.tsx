@@ -17,15 +17,15 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Continental 12 — Fund the Ride. Your Brand Tours India.",
+  title: "The Twelve — Twelve brands. One chrome GT 650. Every road in India.",
   description:
-    "12 curated sticker lots on a Royal Enfield Continental GT 650, auctioned to brands to fund the machine. GPS-verified ride proof, all-or-nothing funding, zero risk. Auction closes 26 January 2027.",
+    "A livery auction: 12 exclusive decal lots on a Royal Enfield Continental GT 650 Mr. Clean. One brand per lot, GPS-verified ride proof, full livery or full refund. Bidding closes 26 January 2027.",
   openGraph: {
-    title: "Continental 12 — Fund the Ride. Your Brand Tours India.",
+    title: "The Twelve — Twelve brands. One chrome GT 650. Every road in India.",
     description:
-      "12 curated lots on a brand-new GT 650 Mr. Clean. Win a lot, your mark rides every kilometre — with proof.",
+      "12 exclusive decal lots on a Continental GT 650. One brand per lot, GPS-proven on every tour. Bidding closes 26 Jan 2027.",
     url: siteUrl,
-    siteName: "Continental 12",
+    siteName: "The Twelve",
     type: "website",
   },
 };

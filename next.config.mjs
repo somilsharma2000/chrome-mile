@@ -7,7 +7,7 @@ const nextConfig = {
     ? {
         // Static export for GitHub Pages hosting
         output: "export",
-        basePath: "/continental-12",
+        basePath: "/the-twelve",
         trailingSlash: true,
       }
     : {}),

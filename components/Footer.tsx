@@ -8,11 +8,11 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <Reveal>
           <h2 className="font-display text-4xl tracking-wide text-bone sm:text-6xl">
-            A LOT IS WAITING. <span className="text-accent">BID.</span>
+            TWELVE LOTS. ONE MACHINE. <span className="text-accent">BID.</span>
           </h2>
           <p className="mt-4 max-w-lg text-bone-muted">
-            Twelve brands. One machine. One Republic Day deadline. The first
-            bid on each lot sets the floor for everyone after it.
+            One brand per lot, and twelve lots only. The first bid on each
+            sets the floor — the close is Republic Day 2027.
           </p>
           <a
             href={waGeneral}
@@ -26,14 +26,14 @@ export default function Footer() {
         </Reveal>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-bone-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Continental 12. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} The Twelve. All rights reserved.</p>
           <a
-            href="https://instagram.com/continental12"
+            href="https://instagram.com/thetwelve.ride"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-bone"
           >
-            <Instagram size={14} aria-hidden />@continental12
+            <Instagram size={14} aria-hidden />@thetwelve.ride
           </a>
           <p className="max-w-md">
             Independent campaign. Not affiliated with Royal Enfield or Eicher
