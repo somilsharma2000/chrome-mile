@@ -1,29 +1,34 @@
 import Reveal from "@/components/Reveal";
+import { ALL_OR_NOTHING_INR, BIDDER_DEPOSIT_INR, FUND_GOAL_INR } from "@/lib/zones";
 
 const FAQS = [
   {
-    q: "How do I place a bid?",
-    a: "Tap Bid on any zone — it opens WhatsApp with the zone pre-filled. State your amount. We confirm every bid personally and keep you posted if you are outbid. Bids are binding offers to buy the zone if you hold the highest confirmed bid at close.",
+    q: "How do I bid?",
+    a: `Tap Bid on any lot — it opens WhatsApp with the lot pre-filled. You place a ₹${BIDDER_DEPOSIT_INR.toLocaleString("en-IN")} refundable deposit to get a Bidder ID, then bid your amount. Bids above ₹25,000 require a GSTIN or PAN for verification.`,
   },
   {
-    q: "When does the auction close?",
-    a: "26 January 2027, 23:59 IST. The countdown on this page is live. The highest confirmed bid per zone at that moment wins.",
+    q: "What if the campaign doesn't reach its goal?",
+    a: `The campaign is all-or-nothing: it proceeds only if at least ₹${ALL_OR_NOTHING_INR.toLocaleString("en-IN")} is committed by close on 26 January 2027. Below that, every rupee is auto-refunded to source. Your risk is zero.`,
   },
   {
-    q: "What do I pay if I win?",
-    a: "Your winning bid for the zone. That covers decal printing, professional installation and the campaign deliverables listed in the sponsor kit. Payment is collected after the auction closes, via a secure payment link.",
+    q: "The bike doesn't exist yet — what exactly am I buying?",
+    a: `A placement on a brand-new 2026 Continental GT 650 Mr. Clean (₹3,87,667 ex-showroom), purchased only after the threshold passes. Your decal is installed at the exact lot position and size listed on this page, and install photos are delivered before the final 70% payment.`,
   },
   {
-    q: "What if the campaign doesn't reach its ₹4,00,000 goal?",
-    a: "Your money is tied to your zone, not the goal. If you win a zone, your placement and deliverables happen regardless of the total raised. The progress bar only reports what has actually been bid and accepted.",
+    q: "How is the money protected between bid and delivery?",
+    a: "Payments run through a payment gateway with digital receipts. Winners pay 30% on award and 70% only after verified installation. Deposits are refunded in full if you're outbid or the campaign doesn't proceed.",
   },
   {
-    q: "Can I sponsor without bidding in the auction?",
-    a: "Yes — brands can take a direct sponsorship inquiry for custom placements (the fork-leg zones are founder-allocated). Message us on WhatsApp and we'll discuss.",
+    q: "Is riding with paid stickers on a private bike legal?",
+    a: "Small bodywork decals on a private-registered vehicle do not alter Registration Certificate particulars (Motor Vehicles Act, Section 52) and placement is declared to the insurer. Nothing is placed on the number plate, lights or mirrors.",
+  },
+  {
+    q: "How is placement decided aesthetically?",
+    a: "Every decal size is fixed in advance and the livery is designed as a whole — chrome surfaces, the exhaust, lighting and controls stay untouched. Twelve curated lots, not a free-for-all. If a brand's artwork doesn't fit the livery, we say no.",
   },
   {
     q: "Is this affiliated with Royal Enfield?",
-    a: "No. Continental 12 is an independent campaign. It is not affiliated with, or endorsed by, Royal Enfield or Eicher Motors.",
+    a: "No. Continental 12 is an independent campaign, not affiliated with or endorsed by Royal Enfield or Eicher Motors.",
   },
 ];
 
@@ -60,6 +65,13 @@ export default function FAQ() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.1}>
+          <p className="mt-8 text-xs text-bone-muted">
+            Campaign goal: ₹{FUND_GOAL_INR.toLocaleString("en-IN")} — Mr. Clean
+            on-road price, riding gear, and touring setup.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

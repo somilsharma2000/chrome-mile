@@ -8,11 +8,11 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <Reveal>
           <h2 className="font-display text-4xl tracking-wide text-bone sm:text-6xl">
-            A ZONE IS WAITING. <span className="text-accent">BID.</span>
+            A LOT IS WAITING. <span className="text-accent">BID.</span>
           </h2>
           <p className="mt-4 max-w-lg text-bone-muted">
-            One bike, 24 zones, one Republic Day deadline. The first bid on
-            each zone sets the floor for everyone after it.
+            Twelve brands. One machine. One Republic Day deadline. The first
+            bid on each lot sets the floor for everyone after it.
           </p>
           <a
             href={waGeneral}
@@ -21,7 +21,7 @@ export default function Footer() {
             className="mt-8 inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <MessageCircle size={18} aria-hidden />
-            Bid on WhatsApp
+            Start on WhatsApp
           </a>
         </Reveal>
 

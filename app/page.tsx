@@ -4,6 +4,8 @@ import ZoneMap from "@/components/ZoneMap";
 import Zones from "@/components/Zones";
 import HowItWorks from "@/components/HowItWorks";
 import SponsorKit from "@/components/SponsorKit";
+import Founder from "@/components/Founder";
+import Legal from "@/components/Legal";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
@@ -17,6 +19,8 @@ export default function Home() {
         <Zones />
         <HowItWorks />
         <SponsorKit />
+        <Founder />
+        <Legal />
         <FAQ />
       </main>
       <Footer />

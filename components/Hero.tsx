@@ -1,6 +1,11 @@
 import Reveal from "@/components/Reveal";
 import Countdown from "@/components/Countdown";
-import { FUND_GOAL_INR, RAISED_INR, availableCount, waGeneral } from "@/lib/zones";
+import {
+  FUND_GOAL_INR,
+  RAISED_INR,
+  availableCount,
+  waGeneral,
+} from "@/lib/zones";
 import { ArrowDown } from "lucide-react";
 
 const pct = Math.min(100, (RAISED_INR / FUND_GOAL_INR) * 100);
@@ -23,23 +28,23 @@ export default function Hero() {
       <div className="relative mx-auto w-full max-w-6xl px-4 pt-28 pb-16 sm:px-6">
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-widest2 text-bone-muted">
-            A sponsorship auction on one Royal Enfield Continental GT 650 — Chrome Edition
+            A sponsorship auction on a Royal Enfield Continental GT 650 — Mr. Clean
           </p>
         </Reveal>
 
         <Reveal delay={0.08}>
           <h1 className="mt-5 max-w-4xl font-display text-6xl leading-[0.95] tracking-wide sm:text-8xl lg:text-9xl">
-            <span className="chrome-text">ONE BIKE. 24 ZONES.</span>
+            <span className="chrome-text">FUND THE RIDE.</span>
             <br />
-            <span className="text-accent">YOUR BRAND RIDES INDIA.</span>
+            <span className="text-accent">YOUR BRAND TOURS INDIA.</span>
           </h1>
         </Reveal>
 
         <Reveal delay={0.16}>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-bone-muted">
-            Every panel, cowl and square inch of rider kit on this bike is one
-            lot in a live auction. Win a zone, your mark rides every kilometre
-            of the campaign.
+            This campaign buys a brand-new GT 650 — funded zone by zone by
+            brands. Win a lot, your mark is installed on the bike or rider
+            kit, and rides every kilometre we tour. With proof.
           </p>
         </Reveal>
 
@@ -56,7 +61,7 @@ export default function Hero() {
                 href="#zones"
                 className="inline-flex w-fit items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
-                View the 24 zones
+                View the 12 lots
                 <ArrowDown size={18} aria-hidden />
               </a>
               <a
@@ -65,7 +70,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="inline-flex w-fit items-center gap-2 rounded-md border border-night-line px-6 py-3 font-semibold text-bone transition-colors duration-150 hover:border-bone-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
-                Place a bid on WhatsApp
+                Talk to the campaign
               </a>
             </div>
           </div>
@@ -74,9 +79,7 @@ export default function Hero() {
         <Reveal delay={0.32}>
           <div className="mt-14 max-w-3xl">
             <div className="flex items-end justify-between text-sm">
-              <p className="text-bone-muted">
-                Campaign fund — verified live total
-              </p>
+              <p className="text-bone-muted">Campaign fund — verified live total</p>
               <p className="font-display text-xl tracking-wide text-bone">
                 ₹{RAISED_INR.toLocaleString("en-IN")}{" "}
                 <span className="text-bone-muted">
@@ -95,8 +98,8 @@ export default function Hero() {
               <div className="h-full bg-accent" style={{ width: `${pct}%` }} />
             </div>
             <p className="mt-2 text-xs text-bone-muted">
-              {availableCount} of 24 zones open · live numbers only, no
-              projections
+              0 of {availableCount} lots committed · live numbers only · goal
+              covers the Mr. Clean on-road price, riding gear and touring setup
             </p>
           </div>
         </Reveal>

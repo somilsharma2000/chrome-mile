@@ -1,31 +1,26 @@
 import Reveal from "@/components/Reveal";
-import { BadgeCheck, Camera, Route, ScrollText, ChartColumn } from "lucide-react";
+import { BadgeCheck, Camera, Route, FileCheck2 } from "lucide-react";
 
 const KIT = [
   {
     icon: BadgeCheck,
-    title: "Exclusive zone ownership",
-    text: "One brand per zone for the full campaign. No shared panels, no rotating slots.",
+    title: "Exclusive lot ownership",
+    text: "One brand per lot for the full campaign season. No shared placements, no rotating slots.",
   },
   {
     icon: Camera,
     title: "Install photography",
-    text: "Professional shots of your mark on the bike, delivered after fitting.",
+    text: "Professional shots of your mark fitted on the bike or gear, delivered after installation.",
   },
   {
     icon: Route,
-    title: "Per-kilometre certificates",
-    text: "Every ride is logged with distance and route. Sponsors receive stamped km certificates for the campaign period.",
+    title: "GPS-verified ride proof",
+    text: "Tours are GPS-logged. You receive per-ride distance certificates and photo updates of your lot on the road.",
   },
   {
-    icon: ScrollText,
-    title: "Campaign updates",
-    text: "Road updates from the ride, with your zone in frame wherever the campaign shares it.",
-  },
-  {
-    icon: ChartColumn,
-    title: "Closing report",
-    text: "At auction close: a factual report of the campaign — zones sold, km ridden, content delivered. Live numbers only.",
+    icon: FileCheck2,
+    title: "Logo usage rights",
+    text: "The campaign's ride photos may be used in your own marketing, with mutual credit.",
   },
 ];
 
@@ -40,12 +35,11 @@ export default function SponsorKit() {
           WHAT EVERY <span className="chrome-text">WINNER GETS</span>
         </h2>
         <p className="mt-4 max-w-xl text-bone-muted">
-          No vague "exposure". Every deliverable below is concrete, dated, and
-          tied to your zone.
+          Concrete, dated deliverables tied to your lot. No vague "exposure".
         </p>
       </Reveal>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2">
         {KIT.map((k, i) => (
           <Reveal key={k.title} delay={i * 0.06}>
             <div className="h-full rounded-lg border border-night-line bg-night-soft p-6 transition-colors duration-200 hover:border-bone-muted/40">

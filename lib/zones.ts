@@ -1,67 +1,57 @@
-export type Tier = "Prime" | "Grid" | "Zones";
-export type ZoneStatus = "AVAILABLE" | "AUTHORITY";
+export type Tier = "Title" | "Feature" | "Detail";
 
 export const TIER_PRICE: Record<Tier, number> = {
-  Prime: 5000,
-  Grid: 3000,
-  Zones: 1000,
+  Title: 75000,
+  Feature: 25000,
+  Detail: 12500,
 };
 
 export const TIER_BLURB: Record<Tier, string> = {
-  Prime: "Highest-visibility real estate on the machine and the rider.",
-  Grid: "Strong surfaces seen in every photo and pass-by.",
-  Zones: "Detail placements that complete the livery.",
+  Title: "The two largest, most photographed surfaces of the campaign. One brand each.",
+  Feature: "High-visibility placements seen in every photo, video and pass-by.",
+  Detail: "Finishing placements that complete the livery without clutter.",
 };
 
 export const AUCTION_CLOSE_ISO = "2027-01-26T23:59:59+05:30";
-export const FUND_GOAL_INR = 400000;
-// Verified at build time: 0 accepted bids in the campaign database.
+export const FUND_GOAL_INR = 500000;
+export const ALL_OR_NOTHING_INR = 250000;
+// Verified at build time: 0 accepted bids. Live numbers only.
 export const RAISED_INR = 0;
+export const BIDDER_DEPOSIT_INR = 2000;
 
 export type Zone = {
-  id: number;
+  id: string;
   name: string;
+  where: string;
+  size: string;
   tier: Tier;
-  status: ZoneStatus;
-  /** schematic marker coordinates on the zone map (svg viewBox 0 0 760 400) */
+  /** marker coordinates on the zone map (svg viewBox 0 0 760 400) */
   x: number;
   y: number;
 };
 
 export const ZONES: Zone[] = [
-  { id: 1, name: "Helmet Shell — Left/Right", tier: "Prime", status: "AVAILABLE", x: 495, y: 52 },
-  { id: 3, name: "Title Rights — Rider Jacket Back", tier: "Prime", status: "AVAILABLE", x: 560, y: 128 },
-  { id: 4, name: "Rider Jacket Chest — Left", tier: "Grid", status: "AVAILABLE", x: 462, y: 155 },
-  { id: 5, name: "Rider Jacket Chest — Right", tier: "Grid", status: "AVAILABLE", x: 512, y: 155 },
-  { id: 6, name: "Rider Jacket Sleeve — Left", tier: "Grid", status: "AVAILABLE", x: 443, y: 178 },
-  { id: 7, name: "Rider Jacket Sleeve — Right", tier: "Grid", status: "AVAILABLE", x: 531, y: 178 },
-  { id: 8, name: "Tank Top Center", tier: "Grid", status: "AVAILABLE", x: 390, y: 196 },
-  { id: 9, name: "Tank Flank — Left", tier: "Prime", status: "AVAILABLE", x: 330, y: 222 },
-  { id: 10, name: "Tank Flank — Right", tier: "Prime", status: "AVAILABLE", x: 452, y: 224 },
-  { id: 13, name: "Front Cowl / Flyscreen", tier: "Prime", status: "AVAILABLE", x: 272, y: 148 },
-  { id: 15, name: "Front Fender — Left Flank", tier: "Zones", status: "AVAILABLE", x: 132, y: 232 },
-  { id: 16, name: "Front Fender — Right Flank", tier: "Zones", status: "AVAILABLE", x: 208, y: 232 },
-  { id: 17, name: "Outer Fork Leg — Left", tier: "Zones", status: "AUTHORITY", x: 196, y: 262 },
-  { id: 18, name: "Outer Fork Leg — Right", tier: "Zones", status: "AUTHORITY", x: 222, y: 212 },
-  { id: 19, name: "Side Panel — Left", tier: "Zones", status: "AVAILABLE", x: 486, y: 252 },
-  { id: 20, name: "Side Panel — Right", tier: "Zones", status: "AVAILABLE", x: 522, y: 252 },
-  { id: 21, name: "Crash Guard Plate — Left", tier: "Zones", status: "AVAILABLE", x: 285, y: 292 },
-  { id: 22, name: "Crash Guard Plate — Right", tier: "Zones", status: "AVAILABLE", x: 305, y: 315 },
-  { id: 23, name: "Rear Monoposto Cowl Flank", tier: "Prime", status: "AVAILABLE", x: 566, y: 218 },
-  { id: 24, name: "Tail Cowl Upper Center", tier: "Grid", status: "AVAILABLE", x: 600, y: 198 },
-  { id: 26, name: "Touring Pannier — Left", tier: "Grid", status: "AVAILABLE", x: 652, y: 212 },
-  { id: 27, name: "Touring Pannier — Right", tier: "Grid", status: "AVAILABLE", x: 652, y: 244 },
-  { id: 28, name: "Swingarm Tube — Left", tier: "Zones", status: "AVAILABLE", x: 556, y: 282 },
-  { id: 29, name: "Swingarm Tube — Right", tier: "Zones", status: "AVAILABLE", x: 528, y: 266 },
+  { id: "T1", name: "Tank Flanks", where: "Both flanks of the fuel tank — sold as one lot", size: "12 × 4 cm pair", tier: "Title", x: 335, y: 220 },
+  { id: "T2", name: "Title Rights — Jacket Back", where: "Upper back of the rider jacket", size: "15 × 5 cm", tier: "Title", x: 560, y: 128 },
+  { id: "F1", name: "Helmet Rear Rim", where: "Rear rim of the helmet, above the visor line", size: "6 × 3 cm", tier: "Feature", x: 495, y: 52 },
+  { id: "F2", name: "Helmet Jawline", where: "Both jawline sides of the helmet — one lot", size: "7 × 2.5 cm pair", tier: "Feature", x: 462, y: 92 },
+  { id: "F3", name: "Seat Cowl Flanks", where: "Both flanks of the rear seat cowl — one lot", size: "10 × 4 cm pair", tier: "Feature", x: 566, y: 218 },
+  { id: "F4", name: "Rider Jacket Chest", where: "Chest of the rider jacket", size: "8 × 4 cm", tier: "Feature", x: 487, y: 158 },
+  { id: "F5", name: "Pannier Flanks", where: "Outer faces of both touring panniers — one lot", size: "12 × 5 cm pair", tier: "Feature", x: 652, y: 212 },
+  { id: "D1", name: "Side Covers", where: "Both side covers below the seat — one lot", size: "8 × 3 cm pair", tier: "Detail", x: 486, y: 252 },
+  { id: "D2", name: "Front Mudguard Tail", where: "Tail of the front mudguard", size: "10 × 2.5 cm", tier: "Detail", x: 208, y: 232 },
+  { id: "D3", name: "Fork Sliders", where: "Both fork slider tubes — one lot", size: "8 × 3 cm pair", tier: "Detail", x: 196, y: 266 },
+  { id: "D4", name: "Pannier Rear Face", where: "Rear face of the right pannier", size: "8 × 3 cm", tier: "Detail", x: 652, y: 248 },
+  { id: "D5", name: "Tank Bag Rear Lip", where: "Rear lip of the tank bag", size: "8 × 3 cm", tier: "Detail", x: 430, y: 190 },
 ];
 
-export const availableCount = ZONES.filter((z) => z.status === "AVAILABLE").length;
+export const availableCount = ZONES.length;
 
 export const waBidLink = (z: Zone) =>
   `https://wa.me/917737077479?text=${encodeURIComponent(
-    `Hi! I want to bid on Zone ${z.id} — ${z.name} (opening ₹${TIER_PRICE[z.tier].toLocaleString("en-IN")}).`
+    `Hi! I want to bid on Lot ${z.id} — ${z.name} (${z.where}, ${z.size}, opening ₹${TIER_PRICE[z.tier].toLocaleString("en-IN")}). I'm ready to place the ₹2,000 refundable bidder deposit.`
   )}`;
 
 export const waGeneral = `https://wa.me/917737077479?text=${encodeURIComponent(
-  "Hi! I want to place a bid on the Continental 12 auction."
+  "Hi! I want to know more about the Continental 12 sponsorship auction."
 )}`;
