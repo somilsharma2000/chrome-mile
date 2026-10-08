@@ -118,10 +118,11 @@ export default function Lot3DScene({
       shadows
     >
       <color attach="background" args={["#0a0a0b"]} />
-      <ambientLight intensity={0.55} />
+      <ambientLight intensity={0.8} />
       <directionalLight position={[4, 6, 3]} intensity={1.3} castShadow />
-      <directionalLight position={[-4, 2, -4]} intensity={0.45} color="#99aabb" />
-      <spotLight position={[0, 5, 0]} intensity={0.6} angle={0.7} penumbra={1} />
+      <directionalLight position={[-4, 2, -4]} intensity={0.6} color="#99aabb" />
+      <directionalLight position={[0, 3, -6]} intensity={0.9} color="#aabbdd" />
+      <spotLight position={[0, 5, 0]} intensity={0.9} angle={0.7} penumbra={1} />
 
       <Suspense fallback={null}>
         <Bike />
