@@ -1,7 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import ZoneMap from "@/components/ZoneMap";
-import Lot3DSection from "@/components/Lot3DSection";
 import Zones from "@/components/Zones";
 import HowItWorks from "@/components/HowItWorks";
 import SponsorKit from "@/components/SponsorKit";
@@ -18,7 +17,6 @@ export default function Home() {
       <main>
         <Hero />
         <ZoneMap />
-        <Lot3DSection />
         <Zones />
         <HowItWorks />
         <SponsorKit />
