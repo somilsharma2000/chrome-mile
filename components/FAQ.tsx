@@ -23,8 +23,12 @@ const FAQS = [
     a: "30% on award, 70% only after your install photography is delivered. Deposits are refunded in full if you're outbid or the auction voids. All payments run through a payment gateway with digital receipts.",
   },
   {
+    q: "What do you need from my brand?",
+    a: "Vector logo files, brand colour codes, a completed brand profile form and a signed sponsor agreement — all listed in the Documents section. We handle printing, installation and photography; you approve the mockup before anything touches the machine.",
+  },
+  {
     q: "How is the livery kept beautiful?",
-    a: "Every decal size is fixed in advance and the livery is designed as a whole — chrome surfaces, the exhaust, lighting and controls stay untouched. Twelve curated lots, not a free-for-all. If a brand's artwork doesn't fit the livery, we say no.",
+    a: "Every decal size is fixed in advance and the livery is designed as a whole — chrome surfaces, the exhaust, lighting and controls stay untouched. If a brand's artwork doesn't fit the composition, we say no.",
   },
   {
     q: "Is riding with brand decals on a private bike legal?",
@@ -32,7 +36,7 @@ const FAQS = [
   },
   {
     q: "Is this affiliated with Royal Enfield?",
-    a: "No. The Twelve is an independent campaign, not affiliated with or endorsed by Royal Enfield or Eicher Motors.",
+    a: "No. Chrome Yatra is an independent campaign, not affiliated with or endorsed by Royal Enfield or Eicher Motors.",
   },
 ];
 
@@ -72,8 +76,8 @@ export default function FAQ() {
 
         <Reveal delay={0.1}>
           <p className="mt-8 text-xs text-bone-muted">
-            Acquisition transparency: the auction covers the 2026 GT 650 Mr.
-            Clean on-road price (ex-showroom ₹3,87,667), riding gear and
+            Acquisition transparency: auction proceeds cover the 2026 GT 650
+            Mr. Clean on-road price (ex-showroom ₹3,87,667), riding gear and
             touring setup — a full itemised breakdown is shared with every
             bidder before deposit.
           </p>

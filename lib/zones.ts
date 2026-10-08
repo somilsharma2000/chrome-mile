@@ -47,9 +47,9 @@ export const ZONES: Zone[] = [
 
 export const waBidLink = (z: Zone) =>
   `https://wa.me/917737077479?text=${encodeURIComponent(
-    `Hi! I want to bid on Lot ${z.id} — ${z.name} (${z.where}, ${z.size}, opens ₹${TIER_PRICE[z.tier].toLocaleString("en-IN")}). Ready to place the ₹${BIDDER_DEPOSIT_INR.toLocaleString("en-IN")} refundable bidder deposit.`
+    `Hi! I'm bidding on Lot ${z.id} — ${z.name} (${z.where}, ${z.size}, opens ₹${TIER_PRICE[z.tier].toLocaleString("en-IN")}) for Chrome Yatra. Please share the bidder terms and deposit details.`
   )}`;
 
 export const waGeneral = `https://wa.me/917737077479?text=${encodeURIComponent(
-  "Hi! I want to know more about The Twelve livery auction."
+  "Hi! I'd like the Chrome Yatra sponsor pack — lot map, auction rules and the sponsor agreement."
 )}`;

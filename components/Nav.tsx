@@ -6,23 +6,26 @@ export default function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-night/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-sm border border-night-line bg-night font-sans text-sm font-extrabold text-accent">
-            12
+          <span className="flex h-8 w-8 items-center justify-center rounded-sm border border-night-line bg-night font-display text-lg text-accent">
+            CY
           </span>
           <span className="font-display text-xl tracking-widest2 text-bone">
-            THE <span className="text-accent">TWELVE</span>
+            CHROME <span className="text-accent">YATRA</span>
           </span>
         </a>
 
         <div className="hidden items-center gap-8 text-sm text-bone-muted md:flex">
           <a href="#zones" className="transition-colors hover:text-bone">
-            The 12 lots
+            The lots
           </a>
           <a href="#how" className="transition-colors hover:text-bone">
             How it works
           </a>
           <a href="#kit" className="transition-colors hover:text-bone">
             What winners get
+          </a>
+          <a href="#docs" className="transition-colors hover:text-bone">
+            Documents
           </a>
           <a href="#faq" className="transition-colors hover:text-bone">
             FAQ

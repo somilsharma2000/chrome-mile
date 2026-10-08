@@ -6,6 +6,7 @@ import HowItWorks from "@/components/HowItWorks";
 import SponsorKit from "@/components/SponsorKit";
 import Founder from "@/components/Founder";
 import Legal from "@/components/Legal";
+import Documents from "@/components/Documents";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <SponsorKit />
         <Founder />
         <Legal />
+        <Documents />
         <FAQ />
       </main>
       <Footer />

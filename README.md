@@ -1,4 +1,4 @@
-# The Twelve
+# Chrome Yatra
 
 **A sponsorship auction on one motorcycle.** 24 physical ad zones — every panel, cowl and square inch of rider kit on a Royal Enfield Continental GT 650 Chrome Edition — auctioned to brands. Winners get their mark as a decal on the bike; every ride is logged and sponsors receive per-kilometre certificates.
 

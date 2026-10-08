@@ -7,7 +7,7 @@ const nextConfig = {
     ? {
         // Static export for GitHub Pages hosting
         output: "export",
-        basePath: "/the-twelve",
+        basePath: "/chrome-yatra",
         trailingSlash: true,
       }
     : {}),
