@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0b;
+  color: #f5f2ec;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #d6402b;
+  color: #f5f2ec;
+}
+
+/* Chrome metallic text — display headlines only */
+.chrome-text {
+  background: linear-gradient(180deg, #ececef 0%, #9a9aa2 55%, #d9d9de 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle racing grid for hero backdrop */
+.race-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Chrome sheen glow used sparingly on hero cards */
+.sheen {
+  background:
+    radial-gradient(60% 50% at 70% 10%, rgba(255, 255, 255, 0.06), transparent 60%),
+    #121214;
+}
