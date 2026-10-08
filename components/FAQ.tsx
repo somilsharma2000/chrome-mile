@@ -2,24 +2,28 @@ import Reveal from "@/components/Reveal";
 
 const FAQS = [
   {
-    q: "Do the kits fit the Chrome Edition specifically?",
-    a: "Yes. All panels are cut against the Chrome Edition's bodywork — tank, side panels and tail. The standard GT 650 shares most panels, but tell us your variant when ordering and we confirm fitment before cutting.",
+    q: "How do I place a bid?",
+    a: "Tap Bid on any zone — it opens WhatsApp with the zone pre-filled. State your amount. We confirm every bid personally and keep you posted if you are outbid. Bids are binding offers to buy the zone if you hold the highest confirmed bid at close.",
   },
   {
-    q: "How long does installation take?",
-    a: "A full livery takes an afternoon (2–4 hours) with basic care. Individual stripe and accent kits take under an hour. The illustrated guide walks panel by panel.",
+    q: "When does the auction close?",
+    a: "26 January 2027, 23:59 IST. The countdown on this page is live. The highest confirmed bid per zone at that moment wins.",
   },
   {
-    q: "Will it damage the factory paint or chrome?",
-    a: "No. We use low-tack automotive adhesive designed for factory finishes. Applied correctly and removed with gentle heat, it comes off clean.",
+    q: "What do I pay if I win?",
+    a: "Your winning bid for the zone. That covers decal printing, professional installation and the campaign deliverables listed in the sponsor kit. Payment is collected after the auction closes, via a secure payment link.",
   },
   {
-    q: "Do you ship across India?",
-    a: "Yes — kits ship pan-India. Dispatch is 3–5 working days since every kit is made to order.",
+    q: "What if the campaign doesn't reach its ₹4,00,000 goal?",
+    a: "Your money is tied to your zone, not the goal. If you win a zone, your placement and deliverables happen regardless of the total raised. The progress bar only reports what has actually been bid and accepted.",
   },
   {
-    q: "Can I get a custom design or my own racing number?",
-    a: "Yes. Message us on WhatsApp with your idea — custom roundels, names and numbers are cut to order.",
+    q: "Can I sponsor without bidding in the auction?",
+    a: "Yes — brands can take a direct sponsorship inquiry for custom placements (the fork-leg zones are founder-allocated). Message us on WhatsApp and we'll discuss.",
+  },
+  {
+    q: "Is this affiliated with Royal Enfield?",
+    a: "No. Continental 12 is an independent campaign. It is not affiliated with, or endorsed by, Royal Enfield or Eicher Motors.",
   },
 ];
 
@@ -32,7 +36,7 @@ export default function FAQ() {
             FAQ
           </p>
           <h2 className="mt-3 font-display text-4xl tracking-wide text-bone sm:text-5xl">
-            BEFORE YOU <span className="chrome-text">ORDER</span>
+            BEFORE YOU <span className="chrome-text">BID</span>
           </h2>
         </Reveal>
 
@@ -51,9 +55,7 @@ export default function FAQ() {
                     </span>
                   </span>
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-bone-muted">
-                  {item.a}
-                </p>
+                <p className="mt-3 text-sm leading-relaxed text-bone-muted">{item.a}</p>
               </details>
             </Reveal>
           ))}

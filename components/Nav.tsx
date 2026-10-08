@@ -1,9 +1,5 @@
-const WA = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999999999";
-
-const waLink = (msg: string) =>
-  `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
-
-export { waLink };
+import { waGeneral } from "@/lib/zones";
+import { MessageCircle } from "lucide-react";
 
 export default function Nav() {
   return (
@@ -19,28 +15,36 @@ export default function Nav() {
         </a>
 
         <div className="hidden items-center gap-8 text-sm text-bone-muted md:flex">
-          <a href="#kits" className="transition-colors hover:text-bone">
-            Kits
+          <a href="#zones" className="transition-colors hover:text-bone">
+            The 24 zones
           </a>
-          <a href="#heritage" className="transition-colors hover:text-bone">
-            Heritage
+          <a href="#how" className="transition-colors hover:text-bone">
+            How it works
           </a>
-          <a href="#included" className="transition-colors hover:text-bone">
-            What&apos;s included
+          <a href="#kit" className="transition-colors hover:text-bone">
+            Sponsor kit
           </a>
           <a href="#faq" className="transition-colors hover:text-bone">
             FAQ
           </a>
         </div>
 
-        <a
-          href={waLink("Hi! I'd like to order a Continental 12 decal kit.")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          Order on WhatsApp
-        </a>
+        <div className="flex items-center gap-3">
+          <span className="hidden rounded-sm border border-night-line px-2.5 py-1 text-xs text-bone-muted sm:block">
+            Closes 26 Jan 2027
+          </span>
+          <a
+            href={waGeneral}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <MessageCircle size={15} aria-hidden />
+              Bid now
+            </span>
+          </a>
+        </div>
       </nav>
     </header>
   );

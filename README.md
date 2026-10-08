@@ -1,25 +1,34 @@
 # Continental 12
 
-Premium heritage racing decal kits for the **Royal Enfield Continental GT 650 Chrome Edition**.
+**A sponsorship auction on one motorcycle.** 24 physical ad zones — every panel, cowl and square inch of rider kit on a Royal Enfield Continental GT 650 Chrome Edition — auctioned to brands. Winners get their mark as a decal on the bike; every ride is logged and sponsors receive per-kilometre certificates.
+
+- **Campaign fund goal:** ₹4,00,000
+- **Auction closes:** 26 January 2027 (Republic Day), 23:59 IST
+- **Bidding:** WhatsApp intake now (`+91 77370 77479`); online bidding engine in Phase 2
 
 Chrome Night design system: near-black surfaces, chrome metallic display type, one heritage racing red accent. Built with Next.js 14, Tailwind CSS, Framer Motion and Lucide icons.
 
 ## Status — LIVE vs PLANNED (zero-fraud documentation)
 
 **LIVE in this codebase:**
-- Full marketing site: Hero, kit catalogue, heritage section, what's-included, FAQ, footer
-- Chrome Night design system (tokens in `tailwind.config.ts`)
-- Scroll-reveal motion (transform/opacity only, `prefers-reduced-motion` respected)
-- WhatsApp order CTAs with per-kit prefilled messages (env-driven)
+- Auction landing: live countdown, honest fund progress (₹0 / ₹4,00,000 — no projections)
+- Interactive SVG zone map (24 lots, tier-coded, tap-through to lot cards)
+- Full lot inventory: 6 Prime, 8 Grid, 10 Zones with tier opening prices
+- Bid-on-WhatsApp CTAs with per-zone prefilled messages
+- How-it-works, sponsor kit (concrete deliverables), auction FAQ, legal disclaimers
 - SEO: metadata, OpenGraph, `robots.ts`, `sitemap.ts` with env-based base URL
 
-**PLANNED (not built yet — do not describe as done):**
-- Online payments (Razorpay checkout)
-- Order/inventory tracking backend
-- Real product photography
-- Auction / sponsorship flows (these exist separately in the Base44 app, not here)
+**PLANNED (not built yet — never describe as done):**
+- Online bidding engine with email-OTP verification (exists in the Base44 app, not connected here)
+- Razorpay payment collection (Razorpay key not configured as of build)
+- Ride log / per-km certificate delivery system
+- Real install photography (requires physical decals)
 
-**Sample data notice:** the kit catalogue in `lib/kits.ts` is placeholder data. Replace names, prices and contents with the real catalog before launch.
+## Zone pricing
+
+Opening prices are tier floors: **Prime ₹5,000 · Grid ₹3,000 · Zones ₹1,000**.
+These are the recommended opening prices; the founder confirms final floors before launch.
+Fork-leg zones are "placement authority" (founder-allocated, not auctioned).
 
 ## Quick start
 
@@ -29,30 +38,24 @@ cp .env.example .env.local   # fill in real values
 npm run dev                  # http://localhost:3000
 ```
 
-## Deploy (free, ~5 minutes)
+## Deploy
 
-1. Push this repo to GitHub (already done).
-2. Go to https://vercel.com → Add New Project → import this repo.
-3. Add the environment variables from `.env.example` (set `NEXT_PUBLIC_SITE_URL` to your live domain).
-4. Deploy. Every future push to `main` auto-deploys.
+Free static hosting via GitHub Pages (already configured — `gh-pages` branch + `EXPORT_MODE=1` build):
+
+```bash
+EXPORT_MODE=1 NEXT_PUBLIC_SITE_URL="https://<your-domain>" npm run build
+# deploy the ./out folder (includes .nojekyll)
+```
+
+For Vercel: import the repo, add env vars, deploy — leave `EXPORT_MODE` unset.
 
 ## Environment variables
 
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Sitemap/robots/metadata base URL — always the live domain in production |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp order number (international format, no `+`) |
-| `NEXT_PUBLIC_INSTAGRAM` | Instagram handle without `@` |
-
-## Design system
-
-- Surfaces: `night` (#0A0A0B), `night-soft` (#121214), borders `night-line`
-- Text: `bone` (#F5F2EC), muted `bone-muted`
-- ONE accent: `accent` (#D6402B heritage red) — actions and highlights only
-- Display font: Bebas Neue (`.font-display`), Body: Inter
-- Motion law: only `transform`/`opacity`, 150–450ms, respect reduced motion
-- Icons: Lucide only, single stroke weight
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp bid intake (defaults to the campaign number) |
 
 ## Legal
 
-Independent decal studio. Not affiliated with Royal Enfield or Eicher Motors. Keep this disclaimer in the footer.
+Independent campaign. Not affiliated with Royal Enfield or Eicher Motors. All bids are offers subject to written confirmation. Keep these disclaimers in the footer.

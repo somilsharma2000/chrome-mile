@@ -1,8 +1,9 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Kits from "@/components/Kits";
-import Heritage from "@/components/Heritage";
-import Included from "@/components/Included";
+import ZoneMap from "@/components/ZoneMap";
+import Zones from "@/components/Zones";
+import HowItWorks from "@/components/HowItWorks";
+import SponsorKit from "@/components/SponsorKit";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
@@ -12,9 +13,10 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Kits />
-        <Heritage />
-        <Included />
+        <ZoneMap />
+        <Zones />
+        <HowItWorks />
+        <SponsorKit />
         <FAQ />
       </main>
       <Footer />

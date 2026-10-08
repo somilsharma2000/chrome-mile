@@ -1,14 +1,16 @@
 import Reveal from "@/components/Reveal";
-import { waLink } from "@/components/Nav";
-import { ArrowDown, MessageCircle } from "lucide-react";
+import Countdown from "@/components/Countdown";
+import { FUND_GOAL_INR, RAISED_INR, availableCount, waGeneral } from "@/lib/zones";
+import { ArrowDown } from "lucide-react";
+
+const pct = Math.min(100, (RAISED_INR / FUND_GOAL_INR) * 100);
 
 export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[92vh] items-center overflow-hidden race-grid"
+      className="relative flex min-h-screen items-center overflow-hidden race-grid"
     >
-      {/* chrome sheen backdrop */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -18,77 +20,85 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 pt-24 pb-16 sm:px-6">
+      <div className="relative mx-auto w-full max-w-6xl px-4 pt-28 pb-16 sm:px-6">
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-widest2 text-bone-muted">
-            Royal Enfield Continental GT 650 — Chrome Edition
+            A sponsorship auction on one Royal Enfield Continental GT 650 — Chrome Edition
           </p>
         </Reveal>
 
         <Reveal delay={0.08}>
-          <h1 className="mt-5 font-display text-6xl leading-[0.95] tracking-wide sm:text-8xl lg:text-9xl">
-            <span className="chrome-text">CHROME. HERITAGE.</span>
+          <h1 className="mt-5 max-w-4xl font-display text-6xl leading-[0.95] tracking-wide sm:text-8xl lg:text-9xl">
+            <span className="chrome-text">ONE BIKE. 24 ZONES.</span>
             <br />
-            <span className="text-accent">NUMBER 12.</span>
+            <span className="text-accent">YOUR BRAND RIDES INDIA.</span>
           </h1>
         </Reveal>
 
         <Reveal delay={0.16}>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-bone-muted">
-            Premium heritage racing decal kits, made to order for the
-            Continental GT 650 Chrome Edition. Pre-cut, kit-by-kit fitment,
-            straight from the workshop to your garage.
+            Every panel, cowl and square inch of rider kit on this bike is one
+            lot in a live auction. Win a zone, your mark rides every kilometre
+            of the campaign.
           </p>
         </Reveal>
 
         <Reveal delay={0.24}>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#kits"
-              className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              View the kits
-              <ArrowDown size={18} aria-hidden />
-            </a>
-            <a
-              href={waLink("Hi! I'd like to order a Continental 12 decal kit.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-night-line px-6 py-3 font-semibold text-bone transition-colors duration-150 hover:border-bone-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              <MessageCircle size={18} aria-hidden />
-              Talk to us
-            </a>
+          <div className="mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
+            <div>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest2 text-accent">
+                Auction closes Republic Day 2027
+              </p>
+              <Countdown />
+            </div>
+            <div className="flex flex-col justify-center gap-4">
+              <a
+                href="#zones"
+                className="inline-flex w-fit items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                View the 24 zones
+                <ArrowDown size={18} aria-hidden />
+              </a>
+              <a
+                href={waGeneral}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-2 rounded-md border border-night-line px-6 py-3 font-semibold text-bone transition-colors duration-150 hover:border-bone-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Place a bid on WhatsApp
+              </a>
+            </div>
           </div>
         </Reveal>
 
         <Reveal delay={0.32}>
-          <dl className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-white/10 pt-8">
-            <div>
-              <dt className="text-xs uppercase tracking-widest2 text-bone-muted">
-                Fitment
-              </dt>
-              <dd className="mt-1 font-display text-2xl tracking-wide text-bone">
-                Chrome Edition
-              </dd>
+          <div className="mt-14 max-w-3xl">
+            <div className="flex items-end justify-between text-sm">
+              <p className="text-bone-muted">
+                Campaign fund — verified live total
+              </p>
+              <p className="font-display text-xl tracking-wide text-bone">
+                ₹{RAISED_INR.toLocaleString("en-IN")}{" "}
+                <span className="text-bone-muted">
+                  / ₹{FUND_GOAL_INR.toLocaleString("en-IN")}
+                </span>
+              </p>
             </div>
-            <div>
-              <dt className="text-xs uppercase tracking-widest2 text-bone-muted">
-                Cut
-              </dt>
-              <dd className="mt-1 font-display text-2xl tracking-wide text-bone">
-                Pre-cut panels
-              </dd>
+            <div
+              role="progressbar"
+              aria-valuenow={RAISED_INR}
+              aria-valuemin={0}
+              aria-valuemax={FUND_GOAL_INR}
+              aria-label="Campaign funds raised"
+              className="mt-2 h-2 overflow-hidden rounded-full bg-night-line"
+            >
+              <div className="h-full bg-accent" style={{ width: `${pct}%` }} />
             </div>
-            <div>
-              <dt className="text-xs uppercase tracking-widest2 text-bone-muted">
-                Ordering
-              </dt>
-              <dd className="mt-1 font-display text-2xl tracking-wide text-bone">
-                Made to order
-              </dd>
-            </div>
-          </dl>
+            <p className="mt-2 text-xs text-bone-muted">
+              {availableCount} of 24 zones open · live numbers only, no
+              projections
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>
