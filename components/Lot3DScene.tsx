@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useMemo } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, ContactShadows, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
@@ -9,37 +9,69 @@ const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const MODEL_URL = `${BP}/models/motorcycle.glb`;
 
 export type Spot = {
-  x: number;
-  y: number;
-  z: number;
+  /** center in model space (meters, bike grounded at y=0, front = +Z) */
+  p: [number, number, number];
+  /** outward normal */
+  n: [number, number, number];
+  /** mirror across x=0 for symmetric pairs */
+  mirror?: boolean;
+  /** decal size in meters (true lot size) */
   w: number;
   h: number;
-  face: "side" | "top";
 };
 
-/** lot hotspots in normalized world units (bike length = 2.2 on X) */
+/**
+ * Hotspots computed from the model's real geometry
+ * (tank width 0.48, seat 0.36, fork slider outer face ±0.149, ...).
+ */
 export const SPOTS: Record<string, Spot> = {
-  T1: { x: 0.18, y: 0.88, z: 0.19, w: 0.13, h: 0.045, face: "side" }, // tank flanks
-  F3: { x: -0.14, y: 0.82, z: 0.16, w: 0.11, h: 0.04, face: "side" }, // seat cowl flanks
-  D1: { x: -0.34, y: 0.6, z: 0.16, w: 0.085, h: 0.03, face: "side" }, // side covers
-  D2: { x: 0.8, y: 0.74, z: 0.03, w: 0.11, h: 0.03, face: "top" }, // front mudguard
-  D3: { x: 0.62, y: 0.52, z: 0.1, w: 0.085, h: 0.03, face: "side" }, // fork sliders
+  T1: { p: [0.245, 0.87, 0.16], n: [1, 0, 0], mirror: true, w: 0.12, h: 0.04 }, // tank flanks
+  F3: { p: [0.185, 0.83, -0.38], n: [1, 0, 0], mirror: true, w: 0.10, h: 0.04 }, // seat cowl flanks
+  D1: { p: [0.228, 0.72, -0.12], n: [1, 0, 0], mirror: true, w: 0.085, h: 0.03 }, // side covers
+  D2: { p: [0.068, 0.66, 0.5], n: [1, 0, 0], mirror: true, w: 0.10, h: 0.035 }, // front mudguard tail
+  D3: { p: [0.152, 0.50, 0.68], n: [1, 0, 0], mirror: true, w: 0.085, h: 0.03 }, // fork sliders
 };
+
+function quatFromNormal(n: [number, number, number]) {
+  const q = new THREE.Quaternion();
+  q.setFromUnitVectors(new THREE.Vector3(0, 0, 1), new THREE.Vector3(...n).normalize());
+  return q;
+}
 
 function Bike() {
   const { scene } = useGLTF(MODEL_URL);
   const obj = useMemo(() => {
-    // clone so we never mutate the cached original
     const m = scene.clone(true);
+    // center on x/z, keep ground at y=0 (tires rest at y=0)
     const box = new THREE.Box3().setFromObject(m);
-    const size = box.getSize(new THREE.Vector3());
-    const center = box.getCenter(new THREE.Vector3());
-    const s = 2.2 / size.x;
-    m.scale.setScalar(s);
-    m.position.set(-center.x * s, -box.min.y * s, -center.z * s);
-    m.traverse((c) => {
-      const mesh = c as unknown as { isMesh?: boolean; castShadow?: boolean };
-      if (mesh.isMesh) mesh.castShadow = true;
+    const c = box.getCenter(new THREE.Vector3());
+    m.position.set(-c.x, 0, -c.z);
+    m.traverse((o) => {
+      const mesh = o as unknown as {
+        isMesh?: boolean;
+        material?: THREE.Material | THREE.Material[];
+        castShadow?: boolean;
+      };
+      if (!mesh.isMesh) return;
+      mesh.castShadow = true;
+      const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+      for (const mat of mats) {
+        const std = mat as THREE.MeshStandardMaterial;
+        // Mr. Clean treatment: the factory "red" body panels become chrome
+        if (std.name === "red") {
+          std.color.set(0xd9dde3);
+          std.metalness = 0.95;
+          std.roughness = 0.16;
+        }
+        if (std.name === "lamp") {
+          std.emissive = new THREE.Color(0xbfd4ff);
+          std.emissiveIntensity = 0.7;
+        }
+        if (std.name === "tail") {
+          std.emissive = new THREE.Color(0xff2a1a);
+          std.emissiveIntensity = 0.8;
+        }
+      }
     });
     return m;
   }, [scene]);
@@ -55,49 +87,53 @@ function Hotspot({
   active: boolean;
   onClick: () => void;
 }) {
-  const color = active ? "#D6402B" : "#C8C8CF";
+  const mirrorSpot = (): Spot => ({
+    ...spot,
+    p: [-spot.p[0], spot.p[1], spot.p[2]],
+    n: [-spot.n[0], spot.n[1], spot.n[2]],
+  });
+  const places = spot.mirror ? [spot, mirrorSpot()] : [spot];
   return (
-    <mesh position={[spot.x, spot.y, 0]}>
-      <sphereGeometry args={[active ? 0.035 : 0.026, 16, 16]} />
-      <meshStandardMaterial
-        color={color}
-        emissive={color}
-        emissiveIntensity={active ? 1.8 : 0.8}
-      />
-      <mesh
-        position={[0, 0, spot.z > 0 ? spot.z : spot.z]}
-        visible={false}
-        onClick={onClick}
-      >
-        <sphereGeometry args={[0.07, 8, 8]} />
-      </mesh>
-    </mesh>
+    <>
+      {places.map((s, i) => {
+        const pos = new THREE.Vector3(...s.p).add(new THREE.Vector3(...s.n).multiplyScalar(0.015));
+        const color = active ? "#D6402B" : "#e8e8ee";
+        return (
+          <mesh key={i} position={pos} onClick={onClick}>
+            <sphereGeometry args={[active ? 0.03 : 0.022, 16, 16]} />
+            <meshStandardMaterial
+              color={color}
+              emissive={color}
+              emissiveIntensity={active ? 1.6 : 0.7}
+            />
+          </mesh>
+        );
+      })}
+    </>
   );
 }
 
-function LogoDecal({ url, spot }: { url: string; spot: Spot }) {
+function Decal({ url, spot }: { url: string; spot: Spot }) {
   const tex = useLoader(THREE.TextureLoader, url);
   tex.colorSpace = THREE.SRGBColorSpace;
-  const mat = (
-    <meshBasicMaterial map={tex} transparent depthWrite={false} />
-  );
-  const geo = <planeGeometry args={[spot.w, spot.h]} />;
+  const mirrorSpot = (): Spot => ({
+    ...spot,
+    p: [-spot.p[0], spot.p[1], spot.p[2]],
+    n: [-spot.n[0], spot.n[1], spot.n[2]],
+  });
+  const places = spot.mirror ? [spot, mirrorSpot()] : [spot];
   return (
     <>
-      {spot.face === "side" ? (
-        <>
-          <mesh position={[spot.x, spot.y, spot.z]}>{geo}{mat}</mesh>
-          <mesh position={[spot.x, spot.y, -spot.z]} rotation={[0, Math.PI, 0]}>
-            {geo}
-            {mat}
-          </mesh>
-        </>
-      ) : (
-        <mesh position={[spot.x, spot.y, spot.z]} rotation={[-Math.PI / 2, 0, 0]}>
-          {geo}
-          {mat}
+      {places.map((s, i) => (
+        <mesh
+          key={i}
+          position={new THREE.Vector3(...s.p).add(new THREE.Vector3(...s.n).multiplyScalar(0.004))}
+          quaternion={quatFromNormal(s.n)}
+        >
+          <planeGeometry args={[spot.w, spot.h]} />
+          <meshBasicMaterial map={tex} transparent depthWrite={false} />
         </mesh>
-      )}
+      ))}
     </>
   );
 }
@@ -113,20 +149,20 @@ export default function Lot3DScene({
 }) {
   return (
     <Canvas
-      camera={{ position: [1.9, 1.15, 2.5], fov: 35 }}
+      camera={{ position: [2.4, 1.35, 2.9], fov: 32 }}
       style={{ height: 460 }}
       shadows
     >
       <color attach="background" args={["#0a0a0b"]} />
-      <ambientLight intensity={0.8} />
-      <directionalLight position={[4, 6, 3]} intensity={1.3} castShadow />
+      <ambientLight intensity={0.75} />
+      <directionalLight position={[4, 6, 3]} intensity={1.4} castShadow />
       <directionalLight position={[-4, 2, -4]} intensity={0.6} color="#99aabb" />
-      <directionalLight position={[0, 3, -6]} intensity={0.9} color="#aabbdd" />
+      <directionalLight position={[0, 3, -6]} intensity={1.0} color="#aabbdd" />
       <spotLight position={[0, 5, 0]} intensity={0.9} angle={0.7} penumbra={1} />
 
       <Suspense fallback={null}>
         <Bike />
-        {logoUrl && <LogoDecal url={logoUrl} spot={SPOTS[selected]} />}
+        {logoUrl && <Decal url={logoUrl} spot={SPOTS[selected]} />}
       </Suspense>
 
       {Object.entries(SPOTS).map(([id, spot]) => (
@@ -139,22 +175,22 @@ export default function Lot3DScene({
       ))}
 
       <ContactShadows
-        position={[0, 0, 0]}
-        opacity={0.45}
-        scale={6}
-        blur={2.4}
-        far={2}
+        position={[0, 0.001, 0]}
+        opacity={0.5}
+        scale={7}
+        blur={2.2}
+        far={2.2}
         color="#000000"
       />
       <OrbitControls
         autoRotate
         autoRotateSpeed={1.1}
         enablePan={false}
-        minDistance={1.8}
-        maxDistance={6}
-        minPolarAngle={0.35}
-        maxPolarAngle={Math.PI / 2}
-        target={[0, 0.6, 0]}
+        minDistance={2.2}
+        maxDistance={7}
+        minPolarAngle={0.3}
+        maxPolarAngle={Math.PI / 2.05}
+        target={[0, 0.75, 0]}
       />
     </Canvas>
   );

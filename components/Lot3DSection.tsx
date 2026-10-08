@@ -133,7 +133,7 @@ export default function Lot3DSection() {
       </div>
 
       <p className="mt-6 text-[10px] text-bone-muted">
-        3D model: “Motorvelo” — Poly by Google, CC BY, via poly.pizza.
+        3D model: road motorcycle — Innerscene, public domain (CC0), recolored chrome.
         Illustrative viewer; the machine is a Royal Enfield Continental GT 650
         Mr. Clean and placement follows the published lot map.
       </p>
