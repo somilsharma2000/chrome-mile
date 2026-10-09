@@ -30,7 +30,7 @@ export default function Preloader() {
             transition={{ duration: 1.1, ease: "easeOut" }}
             className="shimmer-text font-display text-5xl tracking-wide sm:text-7xl"
           >
-            CHROME YATRA
+            CHROME MILE
           </motion.p>
           <div className="h-[2px] w-48 overflow-hidden rounded-full bg-night-line">
             <motion.div
