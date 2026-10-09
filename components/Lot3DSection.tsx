@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { ZONES, TIER_PRICE } from "@/lib/zones";
@@ -62,6 +62,23 @@ const PREVIEWABLE = ["T1", "F3", "D1", "D2", "D3"];
 
 export default function Lot3DSection() {
   const [selected, setSelected] = useState("T1");
+  const [nearView, setNearView] = useState(false);
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setNearView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoAll, setLogoAll] = useState(false);
   const [view, setView] = useState("tank");
@@ -121,8 +138,15 @@ export default function Lot3DSection() {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <div className="overflow-hidden rounded-lg border border-night-line bg-night">
-            {threeDFailed ? (
+          <div
+            ref={stageRef}
+            className="overflow-hidden rounded-lg border border-night-line bg-night"
+          >
+            {!nearView ? (
+              <div className="flex h-[460px] items-center justify-center text-sm text-bone-muted">
+                The showroom loads as you scroll to it.
+              </div>
+            ) : threeDFailed ? (
               fallbackPanel
             ) : (
               <SceneErrorBoundary fallback={fallbackPanel}>
