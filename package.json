@@ -1,8 +1,8 @@
 {
-  "name": "continental-12",
+  "name": "chrome-yatra",
   "version": "1.0.0",
   "private": true,
-  "description": "Continental 12 — premium heritage racing decal kits for the Royal Enfield Continental GT 650 Chrome Edition.",
+  "description": "Chrome Yatra \u2014 a curated livery auction on a Royal Enfield Continental GT 650 Mr. Clean. 12 lots, one brand each, full livery or full refund.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,7 +17,7 @@
     "next": "14.2.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "three": "^0.186.1"
+    "three": "0.169.0"
   },
   "devDependencies": {
     "@types/node": "^20",
