@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import Countdown from "@/components/Countdown";
-import { LOTS_CLAIMED, LOTS_TOTAL, waGeneral } from "@/lib/zones";
+import { LOTS_CLAIMED, LOTS_TOTAL } from "@/lib/zones";
 import { ArrowDown, ChevronDown } from "lucide-react";
 import Magnetic from "@/components/Magnetic";
 
@@ -48,7 +48,7 @@ export default function Hero() {
       >
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-widest2 text-bone-muted">
-            Chrome Yatra — the livery that rides India · A Royal Enfield
+            Chrome Mile — the livery that rides India · A Royal Enfield
             Continental GT 650 · Mr. Clean · 648cc
           </p>
         </Reveal>
@@ -65,7 +65,7 @@ export default function Hero() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-bone-muted">
             A curated livery auction. Twelve decal lots on a chrome GT 650 and
             its touring kit — each lot exclusive to one brand. When the livery
-            completes, the machine ships and the yatra begins: a documented
+            completes, the machine ships and the ride begins: a documented
             season of touring, GPS-logged end to end, with your mark on every
             kilometre.
           </p>
@@ -90,9 +90,7 @@ export default function Hero() {
                 </a>
               </Magnetic>
               <a
-                href={waGeneral}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#docs"
                 className="inline-flex w-fit items-center gap-2 rounded-md border border-night-line px-6 py-3 font-semibold text-bone transition-colors duration-150 hover:border-bone-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Get the sponsor pack
