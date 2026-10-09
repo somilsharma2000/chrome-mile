@@ -1,4 +1,4 @@
-# Chrome Yatra — Brand Profile Form
+# Chrome Mile — Brand Profile Form
 
 Completed by every lot winner within 7 working days of signing.
 
