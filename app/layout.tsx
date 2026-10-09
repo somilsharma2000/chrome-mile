@@ -57,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body className="font-sans">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: "{\"@context\": \"https://schema.org\", \"@graph\": [{\"@type\": \"Organization\", \"name\": \"Chrome Mile\", \"url\": \"https://somilsharma2000.github.io/chrome-mile/\", \"logo\": \"https://somilsharma2000.github.io/chrome-mile/icon.svg\", \"description\": \"A curated livery auction: 12 decal lots on a chrome Royal Enfield GT 650, one brand per lot.\"}, {\"@type\": \"WebSite\", \"name\": \"Chrome Mile\", \"url\": \"https://somilsharma2000.github.io/chrome-mile/\"}]}"}} />
         {children}
         <div aria-hidden className="grain" />
       </body>
