@@ -5,6 +5,7 @@ import Cursor from "@/components/Cursor";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import StatsStrip from "@/components/StatsStrip";
+import RouteLine from "@/components/RouteLine";
 import ZoneMap from "@/components/ZoneMap";
 import Lot3DSection from "@/components/Lot3DSection";
 import Zones from "@/components/Zones";
@@ -27,6 +28,7 @@ export default function Home() {
         <Hero />
         <Marquee />
         <StatsStrip />
+        <RouteLine />
         <ZoneMap />
         <Lot3DSection />
         <Zones />
