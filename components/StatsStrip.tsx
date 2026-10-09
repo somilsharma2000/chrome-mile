@@ -40,7 +40,7 @@ export default function StatsStrip() {
             key={s.label}
             className="rounded-lg border border-night-line bg-card p-5 text-center sm:p-6"
           >
-            <p className="font-display text-5xl tracking-wide text-bone sm:text-6xl">
+            <p className="font-display text-5xl tracking-wide chrome-text sm:text-6xl">
               <CountUp to={s.value} suffix={s.suffix} />
             </p>
             <p className="mt-2 text-xs leading-relaxed text-bone-muted">
