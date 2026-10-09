@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useEffect, useState, type ReactNode } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Canvas, useFrame, useLoader, type ThreeEvent } from "@react-three/fiber";
 import { OrbitControls, ContactShadows, Sparkles } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
@@ -38,6 +38,30 @@ function quatFromNormal(n: [number, number, number]) {
   const q = new THREE.Quaternion();
   q.setFromUnitVectors(new THREE.Vector3(0, 0, 1), new THREE.Vector3(...n).normalize());
   return q;
+}
+
+function spotPlaces(spot: Spot): Spot[] {
+  if (!spot.mirror) return [spot];
+  return [
+    spot,
+    { ...spot, p: [-spot.p[0], spot.p[1], spot.p[2]], n: [-spot.n[0], spot.n[1], spot.n[2]] },
+  ];
+}
+
+/** Which lot owns the point the sponsor just tapped on the bike? */
+function nearestSpotId(point: THREE.Vector3): string | null {
+  let best: string | null = null;
+  let bd = 0.32; // generous grab radius, in meters
+  for (const [id, s] of Object.entries(SPOTS)) {
+    for (const pl of spotPlaces(s)) {
+      const d = Math.hypot(point.x - pl.p[0], point.y - pl.p[1], point.z - pl.p[2]);
+      if (d < bd) {
+        bd = d;
+        best = id;
+      }
+    }
+  }
+  return best;
 }
 
 type BikeStatus = { status: "loading" | "loaded" | "error"; message?: string };
@@ -81,7 +105,7 @@ function prep(scene: THREE.Object3D): THREE.Object3D {
   return m;
 }
 
-function Bike() {
+function Bike({ onPick }: { onPick?: (id: string) => void }) {
   const [state, setState] = useState<{ obj?: THREE.Object3D; err?: string }>({});
   useEffect(() => {
     let alive = true;
@@ -113,7 +137,15 @@ function Bike() {
       alive = false;
     };
   }, []);
-  return state.obj ? <primitive object={state.obj} /> : null;
+
+  // Tap the machine itself: raycast hit → nearest lot. Drags never trigger.
+  const handleClick = (e: ThreeEvent<MouseEvent>) => {
+    if (e.delta > 6) return;
+    const id = nearestSpotId(e.point);
+    if (id) onPick?.(id);
+  };
+
+  return state.obj ? <primitive object={state.obj} onClick={handleClick} /> : null;
 }
 
 function Hotspot({
@@ -125,15 +157,9 @@ function Hotspot({
   active: boolean;
   onClick: () => void;
 }) {
-  const mirrorSpot = (): Spot => ({
-    ...spot,
-    p: [-spot.p[0], spot.p[1], spot.p[2]],
-    n: [-spot.n[0], spot.n[1], spot.n[2]],
-  });
-  const places = spot.mirror ? [spot, mirrorSpot()] : [spot];
   return (
     <>
-      {places.map((s, i) => {
+      {spotPlaces(spot).map((s, i) => {
         const pos = new THREE.Vector3(...s.p).add(new THREE.Vector3(...s.n).multiplyScalar(0.015));
         const color = active ? "#D6402B" : "#e8e8ee";
         return (
@@ -154,15 +180,9 @@ function Hotspot({
 function Decal({ url, spot }: { url: string; spot: Spot }) {
   const tex = useLoader(THREE.TextureLoader, url);
   tex.colorSpace = THREE.SRGBColorSpace;
-  const mirrorSpot = (): Spot => ({
-    ...spot,
-    p: [-spot.p[0], spot.p[1], spot.p[2]],
-    n: [-spot.n[0], spot.n[1], spot.n[2]],
-  });
-  const places = spot.mirror ? [spot, mirrorSpot()] : [spot];
   return (
     <>
-      {places.map((s, i) => (
+      {spotPlaces(spot).map((s, i) => (
         <mesh
           key={i}
           position={new THREE.Vector3(...s.p).add(new THREE.Vector3(...s.n).multiplyScalar(0.004))}
@@ -176,13 +196,48 @@ function Decal({ url, spot }: { url: string; spot: Spot }) {
   );
 }
 
+/** Pulsing red halo marking the selected lot's exact placement */
+function Halo({ spot }: { spot: Spot }) {
+  const mats = useRef<THREE.MeshBasicMaterial[]>([]);
+  useFrame(({ clock }) => {
+    const o = 0.1 + 0.09 * (0.5 + 0.5 * Math.sin(clock.getElapsedTime() * 3.2));
+    mats.current.forEach((m) => {
+      if (m) m.opacity = o;
+    });
+  });
+  return (
+    <>
+      {spotPlaces(spot).map((s, i) => (
+        <mesh
+          key={i}
+          position={new THREE.Vector3(...s.p).add(new THREE.Vector3(...s.n).multiplyScalar(0.006))}
+          quaternion={quatFromNormal(s.n)}
+        >
+          <planeGeometry args={[spot.w + 0.035, spot.h + 0.035]} />
+          <meshBasicMaterial
+            ref={(m) => {
+              if (m) mats.current[i] = m;
+            }}
+            color="#D6402B"
+            transparent
+            opacity={0.15}
+            depthWrite={false}
+          />
+        </mesh>
+      ))}
+    </>
+  );
+}
+
 export default function Lot3DScene({
   selected,
   logoUrl,
+  logoAll,
   onSelect,
 }: {
   selected: string;
   logoUrl: string | null;
+  logoAll: boolean;
   onSelect: (id: string) => void;
 }) {
   const envOnCreated = ({
@@ -202,6 +257,8 @@ export default function Lot3DScene({
     }
   };
 
+  const spot = SPOTS[selected] ?? SPOTS.T1;
+
   return (
     <Canvas
       camera={{ position: [2.4, 1.35, 2.9], fov: 32 }}
@@ -216,14 +273,23 @@ export default function Lot3DScene({
       <directionalLight position={[0, 3, -6]} intensity={1.0} color="#aabbdd" />
 
       <Suspense fallback={null}>
-        <Bike />
-        {logoUrl && <Decal url={logoUrl} spot={SPOTS[selected]} />}
+        <Bike onPick={onSelect} />
+        {logoUrl &&
+          (logoAll ? (
+            Object.entries(SPOTS).map(([id, s]) => (
+              <Decal key={id} url={logoUrl} spot={s} />
+            ))
+          ) : (
+            <Decal url={logoUrl} spot={spot} />
+          ))}
       </Suspense>
 
-      {Object.entries(SPOTS).map(([id, spot]) => (
+      <Halo spot={spot} />
+
+      {Object.entries(SPOTS).map(([id, s]) => (
         <Hotspot
           key={id}
-          spot={spot}
+          spot={s}
           active={id === selected}
           onClick={() => onSelect(id)}
         />
