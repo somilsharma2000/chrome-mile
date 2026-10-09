@@ -171,7 +171,7 @@ function Hotspot({
     <>
       {spotPlaces(spot).map((s, i) => {
         const pos = new THREE.Vector3(...s.p).add(new THREE.Vector3(...s.n).multiplyScalar(0.015));
-        const color = active ? "#D6402B" : "#e8e8ee";
+        const color = active ? "#B8321D" : "#e8e8ee";
         return (
           <mesh key={i} position={pos} onClick={onClick}>
             <sphereGeometry args={[active ? 0.03 : 0.022, 16, 16]} />
@@ -228,7 +228,7 @@ function Halo({ spot }: { spot: Spot }) {
             ref={(m) => {
               if (m) mats.current[i] = m;
             }}
-            color="#D6402B"
+            color="#B8321D"
             transparent
             opacity={0.15}
             depthWrite={false}
@@ -270,7 +270,7 @@ function ShowroomFloor() {
       {/* faint red halo ring outside the podium, the Chrome Mile signature */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.0005, 0]}>
         <ringGeometry args={[2.78, 2.8, 72]} />
-        <meshBasicMaterial color="#D6402B" transparent opacity={0.35} />
+        <meshBasicMaterial color="#B8321D" transparent opacity={0.35} />
       </mesh>
     </group>
   );
