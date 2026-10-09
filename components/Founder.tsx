@@ -18,8 +18,8 @@ export default function Founder() {
             A LIVERY WORTH <span className="chrome-text">SIGNING.</span>
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-bone-muted">
-            Chrome Yatra is run by the rider who owns the road between the
-            idea and the archive. Every lot is positioned, sized and approved
+            Chrome Mile is run by an India-based rider who owns the road
+            between the idea and the archive. Every lot is positioned, sized and approved
             by hand — the livery is composed as a single piece of work, and
             artwork that breaks it is declined, whatever the budget.
           </p>
