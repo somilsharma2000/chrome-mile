@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { AUCTION_CLOSE_ISO } from "@/lib/zones";
 
 const target = new Date(AUCTION_CLOSE_ISO).getTime();
@@ -37,11 +38,20 @@ export default function Countdown() {
         {cells.map((c) => (
           <div
             key={c.l}
-            className="rounded-lg border border-night-line bg-night-soft px-2 py-3 text-center"
+            className="overflow-hidden rounded-lg border border-night-line bg-night-soft px-2 py-3 text-center"
           >
-            <p className="font-display text-3xl tabular-nums tracking-wide text-bone sm:text-4xl">
-              {typeof c.v === "number" ? String(c.v).padStart(2, "0") : c.v}
-            </p>
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.p
+                key={String(c.v)}
+                initial={{ opacity: 0.15, y: -12, scale: 1.14 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 12 }}
+                transition={{ duration: 0.28, ease: "easeOut" }}
+                className="font-display text-3xl tabular-nums tracking-wide text-bone sm:text-4xl"
+              >
+                {typeof c.v === "number" ? String(c.v).padStart(2, "0") : c.v}
+              </motion.p>
+            </AnimatePresence>
             <p className="mt-1 text-[10px] uppercase tracking-widest2 text-bone-muted">
               {c.l}
             </p>
