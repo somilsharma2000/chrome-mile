@@ -27,6 +27,11 @@ const DOCS = [
     desc: "Exactly what you receive and when: install photography, ride certificates, archive access, closing report.",
   },
   {
+    name: "Installation Readiness",
+    file: "INSTALLATION-READINESS.md",
+    desc: "The physical checklist every lot passes before install: measurement, adhesive, safety, approvals. No lot is install-ready until this is signed off.",
+  },
+  {
     name: "Pitch Kit",
     file: "PITCH-KIT.md",
     desc: "The campaign's positioning, one-liners, outreach messages and objection handling — public on purpose.",
