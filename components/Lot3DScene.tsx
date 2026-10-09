@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState, type ReactNode } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, ContactShadows } from "@react-three/drei";
+import { OrbitControls, ContactShadows, Sparkles } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import * as THREE from "three";
@@ -228,6 +228,16 @@ export default function Lot3DScene({
           onClick={() => onSelect(id)}
         />
       ))}
+
+      <Sparkles
+        count={70}
+        scale={[4.5, 2.6, 3]}
+        position={[0, 1, 0]}
+        size={1.8}
+        speed={0.32}
+        opacity={0.5}
+        color="#cfd3da"
+      />
 
       <ContactShadows
         position={[0, 0.001, 0]}
