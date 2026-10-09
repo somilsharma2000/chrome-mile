@@ -267,7 +267,7 @@ function ShowroomFloor() {
         <ringGeometry args={[2.6, 2.7, 72]} />
         <meshStandardMaterial color="#c8ccd4" metalness={0.9} roughness={0.22} envMapIntensity={1.5} />
       </mesh>
-      {/* faint red halo ring outside the podium, the Chrome Yatra signature */}
+      {/* faint red halo ring outside the podium, the Chrome Mile signature */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.0005, 0]}>
         <ringGeometry args={[2.78, 2.8, 72]} />
         <meshBasicMaterial color="#D6402B" transparent opacity={0.35} />
