@@ -27,6 +27,21 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Chrome Mile",
     type: "website",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Chrome Mile — a livery auction on a chrome Royal Enfield GT 650",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chrome Mile — The livery that rides India.",
+    description:
+      "A curated livery auction: 12 decal lots on a chrome GT 650, one brand per lot, GPS-proven on every tour. Bidding closes 26 Jan 2027.",
+    images: ["/og.jpg"],
   },
 };
 
