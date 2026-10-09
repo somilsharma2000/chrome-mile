@@ -36,8 +36,9 @@ export const SPOTS: Record<string, Spot> = {
 
 /** Showroom camera presets (view id → position) */
 const VIEWS: Record<string, [number, number, number]> = {
-  tank: [2.4, 1.35, 2.9],
-  front: [0.15, 1.05, 4.0],
+  hero: [2.9, 1.15, 3.0],
+  side: [3.8, 1.0, 0.15],
+  tank: [1.5, 1.25, 2.0],
   rear: [-2.6, 1.2, -2.6],
   top: [0.6, 3.0, 1.6],
 };
@@ -322,6 +323,7 @@ export default function Lot3DScene({
   logoUrl,
   logoAll,
   onSelect,
+  showMarkers,
   view,
   spinning,
   zoomCmd,
@@ -331,6 +333,7 @@ export default function Lot3DScene({
   logoUrl: string | null;
   logoAll: boolean;
   onSelect: (id: string) => void;
+  showMarkers?: boolean;
   view: string;
   spinning: boolean;
   zoomCmd: { n: number; dir: 1 | -1 };
@@ -357,8 +360,8 @@ export default function Lot3DScene({
 
   return (
     <Canvas
-      camera={{ position: VIEWS.tank, fov: 32 }}
-      style={{ height: 460 }}
+      camera={{ position: VIEWS.hero, fov: 32 }}
+      style={{ height: "100%", width: "100%" }}
       shadows
       onCreated={envOnCreated}
     >
@@ -384,14 +387,15 @@ export default function Lot3DScene({
 
       <Halo spot={spot} />
 
-      {Object.entries(SPOTS).map(([id, s]) => (
-        <Hotspot
-          key={id}
-          spot={s}
-          active={id === selected}
-          onClick={() => onSelect(id)}
-        />
-      ))}
+      {showMarkers !== false &&
+        Object.entries(SPOTS).map(([id, s]) => (
+          <Hotspot
+            key={id}
+            spot={s}
+            active={id === selected}
+            onClick={() => onSelect(id)}
+          />
+        ))}
 
       <ShowroomFloor />
 
