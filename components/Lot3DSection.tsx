@@ -192,8 +192,11 @@ export default function Lot3DSection() {
             </div>
           </div>
           <p className="mt-2 text-xs text-bone-muted">
-            Drag to spin · scroll to zoom · tap the bike itself or a marker to pick a lot ·
-            preview is illustrative; exact sizes are fixed per lot
+            Drag to spin · scroll to zoom · tap the bike itself or a marker to pick a lot
+          </p>
+          <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-wider text-bone-muted/80">
+            Concept preview — not to scale. Final artwork and installation subject to
+            physical measurement, material compatibility, safety and required approvals.
           </p>
         </div>
 
