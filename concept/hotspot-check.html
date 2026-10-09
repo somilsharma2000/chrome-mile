@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Chrome Mile — hotspot check sheet</title>
+<style>
+  body { margin:0; background:#0B0B0C; color:#F2EEE3; font-family:system-ui,sans-serif; padding:24px; }
+  h1 { font-size:18px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 4px; }
+  p { color:#A8A396; font-size:13px; max-width:720px; line-height:1.6; margin:4px 0 18px; }
+  .wrap { position:relative; max-width:1100px; border:1px solid #28282E; overflow:hidden; }
+  .wrap img { display:block; width:100%; }
+  .hs { position:absolute; transform:translate(-50%,-50%); }
+  .hs span { display:flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:#E05A1E; color:#140A05; font:700 11px/1 monospace; }
+  .hs i { position:absolute; left:36px; top:4px; white-space:nowrap; background:rgba(11,11,12,.85); padding:2px 6px; font:11px/1.4 monospace; border-radius:2px; font-style:normal; }
+  .logo { position:absolute; border:2px dashed rgba(228,90,30,.9); transform:translate(-50%,-50%); font:10px monospace; color:#E05A1E; }
+  .logo b { display:block; transform:translate(0,16px); background:rgba(11,11,12,.85); padding:1px 3px; font-weight:400; }
+</style>
+</head>
+<body>
+<h1>Hotspot &amp; placement check sheet</h1>
+<p>Same percentage math as the studio. Hotspot = solid dot at the surface centre. Placement =
+dashed box at the default logo position, sized per lib/concept.ts (w% of image width). If a dot or
+box floats off its surface, the numbers in lib/concept.ts are wrong — fix them here first.</p>
+<div class="wrap">
+  <img src="gt650-hero.jpg" alt="hotspot check" />
+  <!-- HOTSPOTS -->
+  <div class="hs" style="left:48%;top:33%"><span>T1</span><i>T1 Tank Flanks (48,33)</i></div>
+  <div class="hs" style="left:62%;top:31%"><span>F3</span><i>F3 Seat Cowl (62,31)</i></div>
+  <div class="hs" style="left:59%;top:47%"><span>D1</span><i>D1 Side Covers (59,47)</i></div>
+  <div class="hs" style="left:25%;top:20%"><span>D2</span><i>D2 Mudguard (25,20)</i></div>
+  <div class="hs" style="left:21%;top:36%"><span>D3</span><i>D3 Fork (21,36)</i></div>
+  <!-- DEFAULT LOGO PLACEMENTS -->
+  <div class="logo" style="left:48%;top:30%;width:14%;aspect-ratio:2.6"><b>T1 logo</b></div>
+  <div class="logo" style="left:62%;top:28%;width:10%;aspect-ratio:2.6"><b>F3 logo</b></div>
+  <div class="logo" style="left:59%;top:43%;width:8%;aspect-ratio:2.6"><b>D1 logo</b></div>
+  <div class="logo" style="left:25%;top:17%;width:9%;aspect-ratio:2.6"><b>D2 logo</b></div>
+  <div class="logo" style="left:21%;top:33%;width:7%;aspect-ratio:2.6"><b>D3 logo</b></div>
+</div>
+</body>
+</html>
