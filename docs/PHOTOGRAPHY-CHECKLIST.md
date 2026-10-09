@@ -1,3 +1,8 @@
+> **STATUS: CONCEPT STAGE (2026-10-10).** Chrome Mile is a concept campaign: no vehicle
+> partnership is secured, no placement is physically measured, no auction is live, and any
+> prices, dates or mechanics in this document are PROPOSED DRAFTS — not commitments. See
+> docs/VEHICLE-PARTNERSHIP-CHECKLIST.md for the gate that must pass first.
+
 # PHOTOGRAPHY CHECKLIST — THE ACTUAL MACHINE
 
 **Purpose:** capture the real Royal Enfield Continental GT 650 (Mr. Clean) so every

@@ -1,4 +1,9 @@
-# Chrome Mile — Deliverables Schedule
+> **STATUS: CONCEPT STAGE (2026-10-10).** Chrome Mile is a concept campaign: no vehicle
+> partnership is secured, no placement is physically measured, no auction is live, and any
+> prices, dates or mechanics in this document are PROPOSED DRAFTS — not commitments. See
+> docs/VEHICLE-PARTNERSHIP-CHECKLIST.md for the gate that must pass first.
+
+# Chrome Yatra — Deliverables Schedule
 
 What every lot winner receives, and when. Clock references: **D0** = machine
 delivery date, **S0** = signing of the sponsor agreement.

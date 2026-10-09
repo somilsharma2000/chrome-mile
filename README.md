@@ -1,61 +1,56 @@
-# Chrome Yatra
+# Chrome Mile
 
-**A sponsorship auction on one motorcycle.** 24 physical ad zones — every panel, cowl and square inch of rider kit on a Royal Enfield Continental GT 650 Chrome Edition — auctioned to brands. Winners get their mark as a decal on the bike; every ride is logged and sponsors receive per-kilometre certificates.
-
-- **Campaign fund goal:** ₹4,00,000
-- **Auction closes:** 26 January 2027 (Republic Day), 23:59 IST
-- **Bidding:** WhatsApp intake now (`+91 77370 77479`); online bidding engine in Phase 2
-
-Chrome Night design system: near-black surfaces, chrome metallic display type, one heritage racing red accent. Built with Next.js 14, Tailwind CSS, Framer Motion and Lucide icons.
+**A concept-stage advertising-placement campaign on a chrome cafe-racer.** Twelve proposed decal
+placements on a machine in the character of a Royal Enfield Continental GT 650 and its rider kit —
+one brand per placement, GPS-verified ride proof once it rides. Ivory-on-graphite editorial design
+system with a single racing-orange accent. Built with Next.js 14, Tailwind CSS, Framer Motion and
+Lucide icons.
 
 ## Status — LIVE vs PLANNED (zero-fraud documentation)
 
-**LIVE in this codebase:**
-- Auction landing: live countdown, honest fund progress (₹0 / ₹4,00,000 — no projections)
-- Interactive SVG zone map (24 lots, tier-coded, tap-through to lot cards)
-- Full lot inventory: 6 Prime, 8 Grid, 10 Zones with tier opening prices
-- Bid-on-WhatsApp CTAs with per-zone prefilled messages
-- How-it-works, sponsor kit (concrete deliverables), auction FAQ, legal disclaimers
+**LIVE in this codebase (deployed):**
+- Cinematic concept hero and honest status strip (no fabricated metrics)
+- Concept studio: one licensed concept photograph (CC BY-SA 4.0, credited) with camera zoom
+  presets, placement markers, logo upload with size/rotate/perspective controls, before/after
+  compare, PNG export with the illustrative label baked in
+- Lot map — technical schematic view (secondary)
+- Twelve proposed placements, tiered, no prices (pricing announced at partnership confirmation)
+- Brand-interest registration (WhatsApp compose + copy fallback) — non-binding, no payments
+- Admin console (`/admin`): vehicle-partnership readiness checklist, inventory status,
+  asset-swap guide (interim client-side, localStorage, JSON export)
+- Asset calibration sheet (`/concept/calib.html`) for swapping the concept asset
 - SEO: metadata, OpenGraph, `robots.ts`, `sitemap.ts` with env-based base URL
 
-**PLANNED (not built yet — never describe as done):**
-- Online bidding engine with email-OTP verification (exists in the Base44 app, not connected here)
-- Razorpay payment collection (Razorpay key not configured as of build)
-- Ride log / per-km certificate delivery system
-- Real install photography (requires physical decals)
+**NOT TRUE (and never to be claimed):**
+- No vehicle is secured; the showroom image is a licensed concept photograph, not an actual
+  campaign vehicle
+- No placement is physically measured
+- No auction, bidding, deposits or binding payments exist
+- No audience reach, impressions, sponsors or results are claimed
 
-## Zone pricing
-
-Opening prices are tier floors: **Prime ₹5,000 · Grid ₹3,000 · Zones ₹1,000**.
-These are the recommended opening prices; the founder confirms final floors before launch.
-Fork-leg zones are "placement authority" (founder-allocated, not auctioned).
+**PLANNED (blocked, in order):**
+- Vehicle partnership → measurement → pricing → (optionally) an auction engine
+- Payment provider approval for any hold/capture model — hard blocker before bidding
+- Platform backend for the admin CRM (Base44 integration credits currently exhausted)
 
 ## Quick start
 
 ```bash
 npm install
-cp .env.example .env.local   # fill in real values
-npm run dev                  # http://localhost:3000
+EXPORT_MODE=1 NEXT_PUBLIC_SITE_URL="https://somilsharma2000.github.io" NEXT_PUBLIC_BASE_PATH="/chrome-mile" npm run build
+# deploy the ./out folder (includes .nojekyll) to the gh-pages branch
 ```
-
-## Deploy
-
-Free static hosting via GitHub Pages (already configured — `gh-pages` branch + `EXPORT_MODE=1` build):
-
-```bash
-EXPORT_MODE=1 NEXT_PUBLIC_SITE_URL="https://<your-domain>" npm run build
-# deploy the ./out folder (includes .nojekyll)
-```
-
-For Vercel: import the repo, add env vars, deploy — leave `EXPORT_MODE` unset.
 
 ## Environment variables
 
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Sitemap/robots/metadata base URL — always the live domain in production |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp bid intake (defaults to the campaign number) |
+| `NEXT_PUBLIC_BASE_PATH` | GitHub Pages subpath in export mode |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Brand-interest intake (currently a placeholder — see /admin checklist) |
 
 ## Legal
 
-Independent campaign. Not affiliated with Royal Enfield or Eicher Motors. All bids are offers subject to written confirmation. Keep these disclaimers in the footer.
+Independent concept campaign. Not affiliated with Royal Enfield or Eicher Motors. Concept
+photograph: "Royal Enfield Continental GT 650 (1)" by Cjp24, Wikimedia Commons, CC BY-SA 4.0
+(cropped and colour-graded). Keep the disclaimers in the footer and the status language honest.

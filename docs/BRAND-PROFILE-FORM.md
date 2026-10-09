@@ -1,4 +1,9 @@
-# Chrome Mile — Brand Profile Form
+> **STATUS: CONCEPT STAGE (2026-10-10).** Chrome Mile is a concept campaign: no vehicle
+> partnership is secured, no placement is physically measured, no auction is live, and any
+> prices, dates or mechanics in this document are PROPOSED DRAFTS — not commitments. See
+> docs/VEHICLE-PARTNERSHIP-CHECKLIST.md for the gate that must pass first.
+
+# Chrome Yatra — Brand Profile Form
 
 Completed by every lot winner within 7 working days of signing.
 

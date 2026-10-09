@@ -1,4 +1,9 @@
-# Chrome Mile — Auction Rules
+> **STATUS: CONCEPT STAGE (2026-10-10).** Chrome Mile is a concept campaign: no vehicle
+> partnership is secured, no placement is physically measured, no auction is live, and any
+> prices, dates or mechanics in this document are PROPOSED DRAFTS — not commitments. See
+> docs/VEHICLE-PARTNERSHIP-CHECKLIST.md for the gate that must pass first.
+
+# Chrome Yatra — Auction Rules
 
 Effective for the auction closing 26 January 2027, 23:59 IST. Bidding is acceptance of these rules.
 
@@ -10,11 +15,11 @@ Effective for the auction closing 26 January 2027, 23:59 IST. Bidding is accepta
 
 ## 2. Bidding
 - A refundable ₹2,000 bidder deposit is required for a Bidder ID.
-- Bids are placed through the Chrome Mile platform — registration opens ahead of the auction window — and confirmed in writing the same day.
+- Bids are placed via WhatsApp to the campaign number and confirmed in writing the same day.
 - Bids above ₹25,000 require a GSTIN or PAN for verification before confirmation.
 - Bids are open ascending. If you are outbid, you are notified the same day and may re-bid.
 - A bid is a binding offer to purchase the lot if it stands highest at close.
-- Bid time is judged by the platform server timestamp of the bid. Device clocks are display only.
+- Bid time is judged by the WhatsApp server timestamp of the bid message. Device clocks are display only.
 
 ## 3. Close and soft close
 - The auction closes 26 January 2027, 23:59 IST.

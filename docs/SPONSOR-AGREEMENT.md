@@ -1,11 +1,16 @@
-# Chrome Mile — Sponsor Agreement (sample terms)
+> **STATUS: CONCEPT STAGE (2026-10-10).** Chrome Mile is a concept campaign: no vehicle
+> partnership is secured, no placement is physically measured, no auction is live, and any
+> prices, dates or mechanics in this document are PROPOSED DRAFTS — not commitments. See
+> docs/VEHICLE-PARTNERSHIP-CHECKLIST.md for the gate that must pass first.
+
+# Chrome Yatra — Sponsor Agreement (sample terms)
 
 This is the plain-English agreement signed by every lot winner. It is a
 working sample: both parties are free to have their own counsel review and
 amend it before signing.
 
 ## Parties
-- **Campaign:** Chrome Mile, operated by [Founder legal name], ("Licensor")
+- **Campaign:** Chrome Yatra, operated by [Founder legal name], ("Licensor")
 - **Sponsor:** [Brand legal name], GSTIN __________ ("Licensee")
 
 ## 1. The lot

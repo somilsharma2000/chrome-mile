@@ -1,4 +1,9 @@
-# Chrome Mile — Installation Readiness Checklist
+> **STATUS: CONCEPT STAGE (2026-10-10).** Chrome Mile is a concept campaign: no vehicle
+> partnership is secured, no placement is physically measured, no auction is live, and any
+> prices, dates or mechanics in this document are PROPOSED DRAFTS — not commitments. See
+> docs/VEHICLE-PARTNERSHIP-CHECKLIST.md for the gate that must pass first.
+
+# Chrome Yatra — Installation Readiness Checklist
 
 **Status of every lot: CONCEPT — not yet installation-ready.**
 This document tracks what must physically be verified before any lot can be marked

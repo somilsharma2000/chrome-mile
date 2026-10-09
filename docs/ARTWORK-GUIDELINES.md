@@ -1,4 +1,9 @@
-# Chrome Mile — Artwork Guidelines
+> **STATUS: CONCEPT STAGE (2026-10-10).** Chrome Mile is a concept campaign: no vehicle
+> partnership is secured, no placement is physically measured, no auction is live, and any
+> prices, dates or mechanics in this document are PROPOSED DRAFTS — not commitments. See
+> docs/VEHICLE-PARTNERSHIP-CHECKLIST.md for the gate that must pass first.
+
+# Chrome Yatra — Artwork Guidelines
 
 How to prepare your mark for the livery. Print-ready means vector; everything else costs quality on chrome.
 
