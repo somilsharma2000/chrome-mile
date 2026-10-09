@@ -16,6 +16,11 @@ export default function ZoneMap() {
         <h2 className="mt-3 font-display text-4xl tracking-wide text-bone sm:text-5xl">
           THE <span className="chrome-text">LOT MAP</span>
         </h2>
+        <p className="mt-3 text-xs font-semibold uppercase tracking-widest2 text-bone-muted">
+          <span className="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-accent align-middle" aria-hidden />
+          All 12 lots currently available for bidding · status is owner-controlled and
+          updated on this page
+        </p>
         <p className="mt-4 max-w-xl text-bone-muted">
           Schematic of the GT 650 and rider kit. Curated by design, not by
           greed — chrome, exhaust and lighting stay untouched. Tap a marker
