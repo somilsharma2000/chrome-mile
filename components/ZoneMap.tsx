@@ -22,7 +22,8 @@ export default function ZoneMap() {
           to jump to its lot.
         </p>
 
-        <div className="mt-10 overflow-x-auto rounded-lg border border-night-line bg-night p-4 sheen">
+        <div className="relative mt-10 overflow-x-auto rounded-lg border border-night-line bg-night p-4 sheen">
+          <div aria-hidden className="map-sweep" />
           <svg
             viewBox="0 0 760 400"
             role="img"
@@ -54,6 +55,7 @@ export default function ZoneMap() {
             {ZONES.map((z) => (
               <a key={z.id} href={`#zone-${z.id}`}>
                 <g style={{ cursor: "pointer" }}>
+                  <circle aria-hidden className="zone-pulse" cx={z.x} cy={z.y} r="15" fill="none" stroke={TIER_FILL[z.tier]} strokeWidth="2" />
                   <circle cx={z.x} cy={z.y} r="15" fill={TIER_FILL[z.tier]} />
                   <text
                     x={z.x}
