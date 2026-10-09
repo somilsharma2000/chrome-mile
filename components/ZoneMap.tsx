@@ -1,7 +1,7 @@
 import { TIER_PRICE, ZONES } from "@/lib/zones";
 
 const TIER_FILL: Record<string, string> = {
-  Title: "#D6402B",
+  Title: "#B8321D",
   Feature: "#C8C8CF",
   Detail: "#7A7A84",
 };
@@ -54,7 +54,7 @@ export default function ZoneMap() {
             <line x1="590" y1="290" x2="502" y2="252" stroke="#9A9AA2" strokeWidth="7" strokeLinecap="round" />
             <rect x="626" y="196" width="56" height="60" rx="6" fill="#16161A" stroke="#9A9AA2" strokeWidth="2.5" />
             <circle cx="495" cy="90" r="40" fill="#16161A" stroke="#C8C8CF" strokeWidth="2.5" />
-            <path d="M 508 78 A 26 26 0 0 1 508 100" fill="none" stroke="#D6402B" strokeWidth="3" />
+            <path d="M 508 78 A 26 26 0 0 1 508 100" fill="none" stroke="#B8321D" strokeWidth="3" />
             <path d="M 470 126 C 452 158 452 192 468 204 L 520 204 C 534 188 530 138 518 122 Z" fill="#16161A" stroke="#9A9AA2" strokeWidth="2.5" />
 
             {ZONES.map((z) => (
