@@ -41,7 +41,7 @@ export default function Zones() {
               <Reveal key={z.id} delay={i * 0.04}>
                 <article
                   id={`zone-${z.id}`}
-                  className="group flex h-full flex-col justify-between gap-4 rounded-lg border border-night-line bg-night-soft p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-bone-muted/40 sm:flex-row sm:items-center"
+                  className="group flex h-full flex-col justify-between gap-4 rounded-lg border border-night-line bg-night-soft p-5 lot-glow transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 sm:flex-row sm:items-center"
                 >
                   <div className="flex items-center gap-4">
                     <span
