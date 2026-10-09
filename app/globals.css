@@ -19,10 +19,24 @@ body {
 
 /* Chrome metallic text — display headlines only */
 .chrome-text {
-  background: linear-gradient(180deg, #ececef 0%, #9a9aa2 55%, #d9d9de 100%);
+  background: linear-gradient(110deg, #ececef 0%, #9a9aa2 28%, #ffffff 50%, #9a9aa2 72%, #ececef 100%);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: chrome-sheen 7s ease-in-out infinite;
+}
+@keyframes chrome-sheen {
+  0%, 100% { background-position: 0% 0; }
+  50% { background-position: 100% 0; }
+}
+
+/* Gradient chrome border for badges and cards */
+.chrome-frame {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#101013, #101013) padding-box,
+    linear-gradient(135deg, rgba(236,236,239,0.55), rgba(122,122,132,0.2) 45%, rgba(236,236,239,0.5)) border-box;
 }
 
 /* Subtle racing grid for hero backdrop */
@@ -104,7 +118,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track, .shimmer-text, .fallback-glow { animation: none; }
+  .marquee-track, .shimmer-text, .chrome-text, .fallback-glow { animation: none; }
   .btn-shine::after { display: none; }
   html { scroll-behavior: auto; }
 }
