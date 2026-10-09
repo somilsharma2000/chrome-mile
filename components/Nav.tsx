@@ -6,11 +6,11 @@ export default function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-night/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-sm border border-night-line bg-night font-display text-lg text-accent">
-            CY
+          <span className="flex h-8 w-8 items-center justify-center rounded-sm chrome-frame font-display text-lg">
+            <span className="chrome-text">CY</span>
           </span>
           <span className="font-display text-xl tracking-widest2 text-bone">
-            CHROME <span className="text-accent">YATRA</span>
+            <span className="chrome-text">CHROME</span> <span className="text-accent">YATRA</span>
           </span>
         </a>
 
