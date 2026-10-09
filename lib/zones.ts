@@ -44,12 +44,3 @@ export const ZONES: Zone[] = [
   { id: "D4", name: "Pannier Rear Face", where: "Rear face of the right pannier", size: "8 × 3 cm", tier: "Detail", x: 652, y: 248 },
   { id: "D5", name: "Tank Bag Rear Lip", where: "Rear lip of the tank bag", size: "8 × 3 cm", tier: "Detail", x: 430, y: 190 },
 ];
-
-export const waBidLink = (z: Zone) =>
-  `https://wa.me/917737077479?text=${encodeURIComponent(
-    `Hi! I'm bidding on Lot ${z.id} — ${z.name} (${z.where}, ${z.size}, opens ₹${TIER_PRICE[z.tier].toLocaleString("en-IN")}) for Chrome Yatra. Please share the bidder terms and deposit details.`
-  )}`;
-
-export const waGeneral = `https://wa.me/917737077479?text=${encodeURIComponent(
-  "Hi! I'd like the Chrome Yatra sponsor pack — lot map, auction rules and the sponsor agreement."
-)}`;
