@@ -1,5 +1,3 @@
-import { waGeneral } from "@/lib/zones";
-import { MessageCircle } from "lucide-react";
 
 export default function Nav() {
   return (
@@ -10,7 +8,7 @@ export default function Nav() {
             <span className="chrome-text">CY</span>
           </span>
           <span className="font-display text-xl tracking-widest2 text-bone">
-            <span className="chrome-text">CHROME</span> <span className="text-accent">YATRA</span>
+            <span className="chrome-text">CHROME</span> <span className="text-accent">MILE</span>
           </span>
         </a>
 
@@ -37,14 +35,11 @@ export default function Nav() {
             Closes 26 Jan 2027
           </span>
           <a
-            href={waGeneral}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#how"
             className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <span className="inline-flex items-center gap-1.5">
-              <MessageCircle size={15} aria-hidden />
-              Bid now
+              How to bid
             </span>
           </a>
         </div>
