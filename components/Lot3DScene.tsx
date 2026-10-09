@@ -58,11 +58,15 @@ function Bike() {
       const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
       for (const mat of mats) {
         const std = mat as THREE.MeshStandardMaterial;
-        // Mr. Clean treatment: the factory "red" body panels become chrome
+        // Mr. Clean treatment: the factory "red" body panels become bright chrome paint
         if (std.name === "red") {
-          std.color.set(0xd9dde3);
-          std.metalness = 0.95;
-          std.roughness = 0.16;
+          std.color.set(0xe9edf2);
+          std.metalness = 0.45;
+          std.roughness = 0.28;
+          std.envMapIntensity = 1.6;
+        }
+        if (std.name === "chrome" || std.name === "steel") {
+          std.envMapIntensity = 1.6;
         }
         if (std.name === "lamp") {
           std.emissive = new THREE.Color(0xbfd4ff);
