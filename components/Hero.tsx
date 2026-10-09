@@ -55,7 +55,7 @@ export default function Hero() {
 
         <Reveal delay={0.08}>
           <h1 className="mt-5 max-w-4xl font-display text-6xl leading-[0.95] tracking-wide sm:text-8xl lg:text-9xl">
-            <span className="shimmer-text">YOUR NAME ON CHROME.</span>
+            <span className="chrome-text">YOUR NAME ON CHROME.</span>
             <br />
             <span className="text-accent">EVERY ROAD IN INDIA.</span>
           </h1>
