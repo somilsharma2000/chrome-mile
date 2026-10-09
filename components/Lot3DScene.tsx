@@ -1,8 +1,9 @@
 "use client";
 
-import { Suspense, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, ContactShadows, useGLTF } from "@react-three/drei";
+import { OrbitControls, ContactShadows } from "@react-three/drei";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import * as THREE from "three";
 
@@ -39,48 +40,80 @@ function quatFromNormal(n: [number, number, number]) {
   return q;
 }
 
-function Bike() {
-  const { scene } = useGLTF(MODEL_URL);
-  const obj = useMemo(() => {
-    const m = scene.clone(true);
-    // center on x/z, keep ground at y=0 (tires rest at y=0)
-    const box = new THREE.Box3().setFromObject(m);
-    const c = box.getCenter(new THREE.Vector3());
-    m.position.set(-c.x, 0, -c.z);
-    m.traverse((o) => {
-      const mesh = o as unknown as {
-        isMesh?: boolean;
-        material?: THREE.Material | THREE.Material[];
-        castShadow?: boolean;
-      };
-      if (!mesh.isMesh) return;
-      mesh.castShadow = true;
-      const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-      for (const mat of mats) {
-        const std = mat as THREE.MeshStandardMaterial;
-        // Mr. Clean treatment: the factory "red" body panels become bright chrome paint
-        if (std.name === "red") {
-          std.color.set(0xe9edf2);
-          std.metalness = 0.45;
-          std.roughness = 0.28;
-          std.envMapIntensity = 1.6;
-        }
-        if (std.name === "chrome" || std.name === "steel") {
-          std.envMapIntensity = 1.6;
-        }
-        if (std.name === "lamp") {
-          std.emissive = new THREE.Color(0xbfd4ff);
-          std.emissiveIntensity = 0.7;
-        }
-        if (std.name === "tail") {
-          std.emissive = new THREE.Color(0xff2a1a);
-          std.emissiveIntensity = 0.8;
-        }
+type BikeStatus = { status: "loading" | "loaded" | "error"; message?: string };
+
+function prep(scene: THREE.Object3D): THREE.Object3D {
+  const m = scene.clone(true);
+  const box = new THREE.Box3().setFromObject(m);
+  const c = box.getCenter(new THREE.Vector3());
+  m.position.set(-c.x, 0, -c.z);
+  m.traverse((o) => {
+    const mesh = o as unknown as {
+      isMesh?: boolean;
+      material?: THREE.Material | THREE.Material[];
+      castShadow?: boolean;
+    };
+    if (!mesh.isMesh) return;
+    mesh.castShadow = true;
+    const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    for (const mat of mats) {
+      const std = mat as THREE.MeshStandardMaterial;
+      // Mr. Clean treatment: the factory "red" body panels become bright chrome paint
+      if (std.name === "red") {
+        std.color.set(0xe9edf2);
+        std.metalness = 0.45;
+        std.roughness = 0.28;
+        std.envMapIntensity = 1.6;
       }
-    });
-    return m;
-  }, [scene]);
-  return <primitive object={obj} />;
+      if (std.name === "chrome" || std.name === "steel") {
+        std.envMapIntensity = 1.6;
+      }
+      if (std.name === "lamp") {
+        std.emissive = new THREE.Color(0xbfd4ff);
+        std.emissiveIntensity = 0.7;
+      }
+      if (std.name === "tail") {
+        std.emissive = new THREE.Color(0xff2a1a);
+        std.emissiveIntensity = 0.8;
+      }
+    }
+  });
+  return m;
+}
+
+function Bike() {
+  const [state, setState] = useState<{ obj?: THREE.Object3D; err?: string }>({});
+  useEffect(() => {
+    let alive = true;
+    const report = (st: BikeStatus) =>
+      window.dispatchEvent(new CustomEvent("cy-bike-status", { detail: st }));
+    report({ status: "loading" });
+    new GLTFLoader().load(
+      MODEL_URL,
+      (gltf) => {
+        if (!alive) return;
+        try {
+          setState({ obj: prep(gltf.scene) });
+          report({ status: "loaded" });
+        } catch (e) {
+          const message = e instanceof Error ? e.message : String(e);
+          setState({ err: message });
+          report({ status: "error", message });
+        }
+      },
+      undefined,
+      (e) => {
+        if (!alive) return;
+        const message = (e as Error)?.message || String(e);
+        setState({ err: message });
+        report({ status: "error", message });
+      }
+    );
+    return () => {
+      alive = false;
+    };
+  }, []);
+  return state.obj ? <primitive object={state.obj} /> : null;
 }
 
 function Hotspot({
