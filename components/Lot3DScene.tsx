@@ -2,7 +2,8 @@
 
 import { Suspense, useMemo } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, ContactShadows, useGLTF, Environment, Lightformer } from "@react-three/drei";
+import { OrbitControls, ContactShadows, useGLTF } from "@react-three/drei";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import * as THREE from "three";
 
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -152,6 +153,12 @@ export default function Lot3DScene({
       camera={{ position: [2.4, 1.35, 2.9], fov: 32 }}
       style={{ height: 460 }}
       shadows
+      onCreated={({ gl, scene }) => {
+        const pmrem = new THREE.PMREMGenerator(gl);
+        const env = pmrem.fromScene(new RoomEnvironment(), 0.04);
+        scene.environment = env.texture;
+        pmrem.dispose();
+      }}
     >
       <color attach="background" args={["#0a0a0b"]} />
       <ambientLight intensity={0.75} />
@@ -160,14 +167,6 @@ export default function Lot3DScene({
       <directionalLight position={[0, 3, -6]} intensity={1.0} color="#aabbdd" />
       <spotLight position={[0, 5, 0]} intensity={0.9} angle={0.7} penumbra={1} />
 
-      {/* procedural studio lightbox: gives chrome real reflections, zero CDN */}
-      <Environment resolution={256}>
-        <Lightformer intensity={2.5} position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} color="#ffffff" />
-        <Lightformer intensity={3} position={[-5, 1, -1]} scale={[6, 2, 1]} color="#cdd3dd" />
-        <Lightformer intensity={3} position={[5, 1, 0]} rotation-y={Math.PI / 2} scale={[6, 2, 1]} color="#e8e2d5" />
-        <Lightformer intensity={1.6} position={[0, 2, 5]} scale={[8, 3, 1]} color="#aab4c4" />
-        <Lightformer intensity={1.2} position={[0, 2, -5]} rotation-y={Math.PI} scale={[8, 3, 1]} color="#8b95a6" />
-      </Environment>
 
       <Suspense fallback={null}>
         <Bike />
