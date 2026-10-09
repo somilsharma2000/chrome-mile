@@ -1,4 +1,4 @@
-# Chrome Yatra — Installation Readiness Checklist
+# Chrome Mile — Installation Readiness Checklist
 
 **Status of every lot: CONCEPT — not yet installation-ready.**
 This document tracks what must physically be verified before any lot can be marked
