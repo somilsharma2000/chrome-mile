@@ -7,7 +7,7 @@ import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment
 import * as THREE from "three";
 
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
-const MODEL_URL = `${BP}/models/motorcycle.glb`;
+const MODEL_URL = `${BP}/models/motorcycle-r2.glb`;
 
 export type Spot = {
   /** center in model space (meters, bike grounded at y=0, front = +Z) */
