@@ -5,8 +5,20 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { ZONES, TIER_PRICE, waBidLink } from "@/lib/zones";
 import Reveal from "@/components/Reveal";
+import { useProgress } from "@react-three/drei";
 import { Upload, MessageCircle } from "lucide-react";
 
+
+
+function LoadProbe() {
+  const { active, progress, errors, item } = useProgress();
+  return (
+    <p className="text-[10px] text-bone-muted">
+      3D probe: {active ? `loading ${progress.toFixed(0)}% ${item ?? ""}` : "idle"}{" "}
+      {errors.length > 0 && `ERROR: ${errors.join(" | ")}`}
+    </p>
+  );
+}
 
 class SceneErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -82,6 +94,7 @@ export default function Lot3DSection() {
               <Lot3DScene selected={selected} logoUrl={logoUrl} onSelect={setSelected} />
             </SceneErrorBoundary>
           </div>
+          <LoadProbe />
           <p className="mt-2 text-xs text-bone-muted">
             Drag to spin · scroll to zoom · tap a marker to select the lot ·
             preview is illustrative; exact sizes are fixed per lot
