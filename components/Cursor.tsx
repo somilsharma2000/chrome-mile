@@ -35,7 +35,7 @@ export default function Cursor() {
         animate={{
           width: hovering ? 52 : 30,
           height: hovering ? 52 : 30,
-          borderColor: hovering ? "#d6402b" : "rgba(154,154,162,0.5)",
+          borderColor: hovering ? "#b8321d" : "rgba(154,154,162,0.5)",
         }}
         transition={{ duration: 0.18 }}
       />
