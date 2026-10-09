@@ -25,8 +25,8 @@ export default function ZoneMap() {
         </p>
         <p className="mt-4 max-w-xl text-bone-muted">
           Schematic of the GT 650 and rider kit. Curated by design, not by
-          greed — chrome, exhaust and lighting stay untouched. Tap a marker
-          to jump to its lot.
+          greed — chrome, exhaust and lighting stay untouched. Tap a marker to open
+          the lot live in the showroom below.
         </p>
 
         <div className="relative mt-10 overflow-x-auto rounded-lg border border-night-line bg-night p-4 sheen">
