@@ -1,4 +1,4 @@
-# Chrome Yatra — Artwork Guidelines
+# Chrome Mile — Artwork Guidelines
 
 How to prepare your mark for the livery. Print-ready means vector; everything else costs quality on chrome.
 
