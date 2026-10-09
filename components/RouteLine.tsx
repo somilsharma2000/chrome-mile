@@ -24,7 +24,7 @@ export default function RouteLine() {
             strokeDasharray="2 24"
             opacity="0.5"
           />
-          <circle r="4" fill="#D6402B">
+          <circle r="4" fill="#B8321D">
             <animateMotion
               dur="10s"
               repeatCount="indefinite"
