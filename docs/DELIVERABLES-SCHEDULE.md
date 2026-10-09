@@ -1,4 +1,4 @@
-# Chrome Yatra — Deliverables Schedule
+# Chrome Mile — Deliverables Schedule
 
 What every lot winner receives, and when. Clock references: **D0** = machine
 delivery date, **S0** = signing of the sponsor agreement.
