@@ -1,8 +1,8 @@
 "use client";
 
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Canvas, useFrame, useLoader, type ThreeEvent } from "@react-three/fiber";
-import { OrbitControls, ContactShadows, Sparkles } from "@react-three/drei";
+import { Canvas, useFrame, useLoader, useThree, type ThreeEvent } from "@react-three/fiber";
+import { OrbitControls, ContactShadows, Sparkles, MeshReflectorMaterial } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import * as THREE from "three";
@@ -33,6 +33,16 @@ export const SPOTS: Record<string, Spot> = {
   D2: { p: [0.068, 0.66, 0.5], n: [1, 0, 0], mirror: true, w: 0.10, h: 0.035 }, // front mudguard tail
   D3: { p: [0.152, 0.50, 0.68], n: [1, 0, 0], mirror: true, w: 0.085, h: 0.03 }, // fork sliders
 };
+
+/** Showroom camera presets (view id → position) */
+const VIEWS: Record<string, [number, number, number]> = {
+  tank: [2.4, 1.35, 2.9],
+  front: [0.15, 1.05, 4.0],
+  rear: [-2.6, 1.2, -2.6],
+  top: [0.6, 3.0, 1.6],
+};
+
+const TARGET = new THREE.Vector3(0, 0.75, 0);
 
 function quatFromNormal(n: [number, number, number]) {
   const q = new THREE.Quaternion();
@@ -229,16 +239,102 @@ function Halo({ spot }: { spot: Spot }) {
   );
 }
 
+/**
+ * Showroom floor: dark mirror with a chrome podium ring, like a dealership
+ * turntable stage.
+ */
+function ShowroomFloor() {
+  return (
+    <group>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.002, 0]}>
+        <circleGeometry args={[2.7, 72]} />
+        <MeshReflectorMaterial
+          blur={[300, 80]}
+          resolution={512}
+          mixBlur={1}
+          mixStrength={30}
+          roughness={0.85}
+          depthScale={1.1}
+          minDepthThreshold={0.4}
+          maxDepthThreshold={1.4}
+          color="#060607"
+          metalness={0.7}
+          mirror={0.55}
+        />
+      </mesh>
+      {/* chrome podium ring */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.001, 0]}>
+        <ringGeometry args={[2.6, 2.7, 72]} />
+        <meshStandardMaterial color="#c8ccd4" metalness={0.9} roughness={0.22} envMapIntensity={1.5} />
+      </mesh>
+      {/* faint red halo ring outside the podium, the Chrome Yatra signature */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.0005, 0]}>
+        <ringGeometry args={[2.78, 2.8, 72]} />
+        <meshBasicMaterial color="#D6402B" transparent opacity={0.35} />
+      </mesh>
+    </group>
+  );
+}
+
+/**
+ * Camera rig: flies the camera to showroom view presets and dollies on zoom
+ * commands. Pauses while the user is dragging.
+ */
+function CameraRig({
+  view,
+  zoomCmd,
+}: {
+  view: string;
+  zoomCmd: { n: number; dir: 1 | -1 };
+}) {
+  const { camera, controls } = useThree();
+  const flyTo = useRef<THREE.Vector3 | null>(null);
+
+  useEffect(() => {
+    const p = VIEWS[view] ?? VIEWS.tank;
+    flyTo.current = new THREE.Vector3(...p);
+  }, [view]);
+
+  useEffect(() => {
+    if (zoomCmd.n === 0) return;
+    const dir = camera.position.clone().sub(TARGET).normalize();
+    const next = camera.position.clone().addScaledVector(dir, zoomCmd.dir * 0.55);
+    const dist = next.distanceTo(TARGET);
+    if (dist >= 2.2 && dist <= 7) {
+      flyTo.current = next;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [zoomCmd.n]);
+
+  useFrame(() => {
+    const t = flyTo.current;
+    if (!t) return;
+    camera.position.lerp(t, 0.09);
+    if (camera.position.distanceTo(t) < 0.04) flyTo.current = null;
+    (controls as unknown as { update?: () => void })?.update?.();
+  });
+
+  return null;
+}
+
 export default function Lot3DScene({
   selected,
   logoUrl,
   logoAll,
   onSelect,
+  view,
+  spinning,
+  zoomCmd,
+  onUserStart,
 }: {
   selected: string;
   logoUrl: string | null;
   logoAll: boolean;
   onSelect: (id: string) => void;
+  view: string;
+  spinning: boolean;
+  zoomCmd: { n: number; dir: 1 | -1 };
+  onUserStart: () => void;
 }) {
   const envOnCreated = ({
     gl,
@@ -261,7 +357,7 @@ export default function Lot3DScene({
 
   return (
     <Canvas
-      camera={{ position: [2.4, 1.35, 2.9], fov: 32 }}
+      camera={{ position: VIEWS.tank, fov: 32 }}
       style={{ height: 460 }}
       shadows
       onCreated={envOnCreated}
@@ -271,6 +367,8 @@ export default function Lot3DScene({
       <directionalLight position={[4, 6, 3]} intensity={1.4} castShadow />
       <directionalLight position={[-4, 2, -4]} intensity={0.6} color="#99aabb" />
       <directionalLight position={[0, 3, -6]} intensity={1.0} color="#aabbdd" />
+      {/* showroom key spots */}
+      <spotLight position={[0, 5.5, 0]} angle={0.5} penumbra={0.8} intensity={1.6} color="#dfe6f0" />
 
       <Suspense fallback={null}>
         <Bike onPick={onSelect} />
@@ -295,6 +393,8 @@ export default function Lot3DScene({
         />
       ))}
 
+      <ShowroomFloor />
+
       <Sparkles
         count={70}
         scale={[4.5, 2.6, 3]}
@@ -306,15 +406,17 @@ export default function Lot3DScene({
       />
 
       <ContactShadows
-        position={[0, 0.001, 0]}
-        opacity={0.5}
-        scale={7}
-        blur={2.2}
-        far={2.2}
+        position={[0, 0.003, 0]}
+        opacity={0.45}
+        scale={5}
+        blur={2.4}
+        far={2.0}
         color="#000000"
       />
+      <CameraRig view={view} zoomCmd={zoomCmd} />
       <OrbitControls
-        autoRotate
+        makeDefault
+        autoRotate={spinning}
         autoRotateSpeed={1.1}
         enablePan={false}
         minDistance={2.2}
@@ -322,6 +424,7 @@ export default function Lot3DScene({
         minPolarAngle={0.3}
         maxPolarAngle={Math.PI / 2.05}
         target={[0, 0.75, 0]}
+        onStart={onUserStart}
       />
     </Canvas>
   );
