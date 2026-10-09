@@ -1,4 +1,4 @@
-# Chrome Yatra — Pitch Kit
+# Chrome Mile — Pitch Kit
 
 Public on purpose: how this campaign is positioned and pitched. Built from
 documented precedents (the Million Dollar Homepage, Buy My Face,
@@ -6,7 +6,7 @@ IWearYourShirt, privateer livery sponsorships) — what made them work was
 scarcity + press value + proof, never begging.
 
 ## Positioning
-**Chrome Yatra** — the livery that rides India.
+**Chrome Mile** — the livery that rides India.
 One chrome Royal Enfield Continental GT 650 (Mr. Clean). Twelve decal lots,
 one brand each. The machine ships in full livery, then tours India
 GPS-logged end to end. Sponsors get the placement, the proof and the
@@ -19,7 +19,7 @@ imagery — the press hook is real, not promised.
 - "One brand per lot. Twelve lots. Then the inventory is gone."
 
 ## The ask (WhatsApp cold outreach, ~80 words)
-> Hi [Name] — Chrome Yatra is a curated livery auction: 12 exclusive decal lots on a chrome Royal Enfield GT 650 that tours India after the livery completes. Your logo rides every documented kilometre — GPS-verified ride certificates, professional install photos, and usage rights for your own marketing. One brand per lot. Bidding closes 26 Jan 2027, and the campaign ships complete or refunds everyone. Lot [X] opens at ₹[price]. Want the sponsor pack with your logo mocked on the bike?
+> Hi [Name] — Chrome Mile is a curated livery auction: 12 exclusive decal lots on a chrome Royal Enfield GT 650 that tours India after the livery completes. Your logo rides every documented kilometre — GPS-verified ride certificates, professional install photos, and usage rights for your own marketing. One brand per lot. Bidding closes 26 Jan 2027, and the campaign ships complete or refunds everyone. Lot [X] opens at ₹[price]. Want the sponsor pack with your logo mocked on the bike?
 
 ## Follow-up (48 hours, one message only)
 > Sharing the sponsor pack anyway — the lot map and the auction rules are public, and [lot] is still open. The full-livery-or-refund rule means there's no downside to bidding early: you set the floor, everyone else climbs. Closing is Republic Day 2027.
