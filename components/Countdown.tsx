@@ -38,7 +38,7 @@ export default function Countdown() {
         {cells.map((c) => (
           <div
             key={c.l}
-            className="overflow-hidden rounded-lg border border-night-line bg-night-soft px-2 py-3 text-center"
+            className="overflow-hidden rounded-lg chrome-frame px-2 py-3 text-center"
           >
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.p
@@ -47,7 +47,7 @@ export default function Countdown() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 12 }}
                 transition={{ duration: 0.28, ease: "easeOut" }}
-                className="font-display text-3xl tabular-nums tracking-wide text-bone sm:text-4xl"
+                className="font-display text-3xl tabular-nums tracking-wide chrome-text sm:text-4xl"
               >
                 {typeof c.v === "number" ? String(c.v).padStart(2, "0") : c.v}
               </motion.p>
