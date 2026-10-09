@@ -7,7 +7,7 @@ const nextConfig = {
     ? {
         // Static export for GitHub Pages hosting
         output: "export",
-        basePath: "/chrome-yatra",
+        basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
         trailingSlash: true,
       }
     : {}),
