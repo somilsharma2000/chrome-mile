@@ -12,16 +12,16 @@ scarcity + press value + proof, never begging.
 
 ## Positioning
 **Chrome Yatra** — the livery that rides India.
-One chrome Royal Enfield Continental GT 650 (Mr. Clean). Twelve decal lots,
+One chrome Royal Enfield Continental GT 650 (Mr. Clean). Five decal lots, machine only,
 one brand each. The machine ships in full livery, then tours India
 GPS-logged end to end. Sponsors get the placement, the proof and the
 imagery — the press hook is real, not promised.
 
 ## One-liners (pick per context)
-- "Twelve brands will ride across India on one chrome GT 650. One of them is yours."
+- "Five brands will ride across India on one chrome GT 650. One of them is yours."
 - "A rolling livery, GPS-proven, with your name on it."
 - "Hoardings stand still. Your mark rides."
-- "One brand per lot. Twelve lots. Then the inventory is gone."
+- "One brand per lot. Five lots. Then the inventory is gone."
 
 ## The ask (WhatsApp cold outreach, ~80 words)
 > Hi [Name] — Chrome Yatra is a curated livery auction: 12 exclusive decal lots on a chrome Royal Enfield GT 650 that tours India after the livery completes. Your logo rides every documented kilometre — GPS-verified ride certificates, professional install photos, and usage rights for your own marketing. One brand per lot. Bidding closes 26 Jan 2027, and the campaign ships complete or refunds everyone. Lot [X] opens at ₹[price]. Want the sponsor pack with your logo mocked on the bike?
@@ -36,7 +36,7 @@ imagery — the press hook is real, not promised.
 - **"What if you never ride?"** — "Then it's visible: every tour is GPS-logged and published, and the agreement refunds the balance if install photography slips past 60 days. Evidence, not promises."
 
 ## Target brand types (in order of fit)
-1. Riding gear and accessories (Rynox-class, helmets, apparel)
+1. Riding gear and accessories (Rynox-class, helmets, apparel) — only as supporters, not placements; the livery itself is machine-only
 2. Lubricants, tyres, fuel additives
 3. Afterparts and custom houses
 4. D2C brands chasing a road-trip association (beverages, apparel, apps)

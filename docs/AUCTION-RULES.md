@@ -8,9 +8,9 @@
 Effective for the auction closing 26 January 2027, 23:59 IST. Bidding is acceptance of these rules.
 
 ## 1. The lots
-- Twelve (12) decal lots on one Royal Enfield Continental GT 650 (Mr. Clean) and its rider kit, each sold to exactly one brand.
+- Five (5) decal lots on one Royal Enfield Continental GT 650 (Mr. Clean), each sold to exactly one brand. The livery covers the machine only — no helmet, jacket or luggage placements.
 - Lot positions, sizes and opening prices are published on the lot map and are final.
-- The twelve lots are physically non-overlapping; no placement can be sold twice. Availability is owner-controlled: a lot is only open for bidding while its status on the site reads "available".
+- The five lots are physically non-overlapping; no placement can be sold twice. Availability is owner-controlled: a lot is only open for bidding while its status on the site reads "available".
 - Opening prices: Title ₹75,000 · Feature ₹25,000 · Detail ₹12,500. These are floors, not ceilings.
 
 ## 2. Bidding
@@ -27,7 +27,7 @@ Effective for the auction closing 26 January 2027, 23:59 IST. Bidding is accepta
 - Soft close is capped: no lot stays open later than 00:29 IST on 27 January 2027 (30 minutes past the published close). Any bid received after the cap does not extend the auction, and the lot closes to the highest valid bid received before it.
 
 ## 4. Full livery or no livery
-- The campaign proceeds only if all twelve lots are sold by close.
+- The campaign proceeds only if all five lots are sold by close.
 - If any lot is unsold, the auction voids and every payment and deposit is returned in full within 7 working days to source. Nothing ships half-liveried.
 
 ## 5. Payment

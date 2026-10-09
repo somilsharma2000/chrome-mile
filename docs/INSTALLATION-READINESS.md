@@ -38,5 +38,5 @@ installation-ready. No lot ships on a good-looking concept mockup alone.
 A lot is marked installation-ready only when sections 1-5 are complete and signed off
 by the campaign owner. Until then, every site preview is a concept, not a promise.
 
-**Current state:** All twelve lots are at concept stage. Measurement and test-fit
+**Current state:** All five machine lots are at concept stage. Measurement and test-fit
 begin after the auction awards its winners, before any payment is collected in full.

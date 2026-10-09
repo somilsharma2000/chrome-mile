@@ -1,7 +1,7 @@
 # Chrome Mile
 
-**A concept-stage advertising-placement campaign on a chrome cafe-racer.** Twelve proposed decal
-placements on a machine in the character of a Royal Enfield Continental GT 650 and its rider kit —
+**A concept-stage advertising-placement campaign on a chrome cafe-racer.** Five proposed decal
+placements on a machine in the character of a Royal Enfield Continental GT 650 — machine only, no rider gear —
 one brand per placement, GPS-verified ride proof once it rides. Ivory-on-graphite editorial design
 system with a single racing-orange accent. Built with Next.js 14, Tailwind CSS, Framer Motion and
 Lucide icons.
@@ -14,7 +14,7 @@ Lucide icons.
   presets, placement markers, logo upload with size/rotate/perspective controls, before/after
   compare, PNG export with the illustrative label baked in
 - Lot map — technical schematic view (secondary)
-- Twelve proposed placements, tiered, no prices (pricing announced at partnership confirmation)
+- Five proposed machine placements, tiered, no prices (pricing announced at partnership confirmation)
 - Brand-interest registration (WhatsApp compose + copy fallback) — non-binding, no payments
 - Admin console (`/admin`): vehicle-partnership readiness checklist, inventory status,
   asset-swap guide (interim client-side, localStorage, JSON export)

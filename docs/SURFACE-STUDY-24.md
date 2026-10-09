@@ -49,7 +49,7 @@ the current 12-lot model repriced Title surfaces at ₹75,000.
 ## Ideas extracted (why this archive matters)
 
 1. **Granular surface thinking.** The 24 model mapped surfaces the current
-   12-lot livery doesn't sell: jacket sleeves, crash guard plates, swingarm
+   five-lot machine livery doesn't sell: jacket sleeves, crash guard plates, swingarm
    tubes, flyscreen, front cowl, individual tank top center. This is the
    machine's full decal-able real estate map — the master reference for any
    future expansion.

@@ -56,12 +56,12 @@ Take each shot 2–3 times, keep the best. Total time: about 45 minutes.
 ### 5. `rear-3q.jpg` — Rear three-quarter
 - Rear-left of the bike, 45° off dead-centre.
 - Frame: rear wheel to seat cowl, tail fully in shot.
-- **Enables:** F3 · F5 · D4 · (helmet F1 if the helmet is on the mirror)
+- **Enables:** F3
 
 ### 6. `rear.jpg` — Dead-on rear
 - Square to the tail, tank height.
-- Frame: rear tyre to pannier tops.
-- **Enables:** F5 · D4
+- Frame: rear tyre to seat cowl top.
+- **Enables:** F3 (seat cowl flanks)
 
 ### 7. `tank-l.jpg` — Left tank flank close-up
 - 1 metre from the tank, phone square to the tank flank surface.
@@ -80,13 +80,10 @@ Take each shot 2–3 times, keep the best. Total time: about 45 minutes.
 - 1 metre, square to the fork legs.
 - **Enables:** D2 · D3
 
-### 11. `pannier.jpg` — Pannier outer face close-up
-- 1 metre, square to the pannier face.
-- **Enables:** F5 · D4
+### 11. `swingarm.jpg` — Swingarm right side
+- 1 metre, square to the swingarm.
+- **Enables:** D1 background context
 
-### Rider kit (optional but strong — sell the rider-kit lots visually)
-- `helmet.jpg` — helmet on a plain surface, rear rim + jawline visible (F1, F2)
-- `jacket.jpg` — jacket hung flat, chest + upper back visible (F4, T2)
 
 ---
 

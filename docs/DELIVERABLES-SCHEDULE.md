@@ -13,7 +13,7 @@ delivery date, **S0** = signing of the sponsor agreement.
 | 1 | Placement mockup (photo-accurate) | S0 + 5 working days | After brand assets received |
 | 2 | Mockup revision round (one included) | S0 + 10 working days | — |
 | 3 | Install photography (professional, full lot) | D0 + 37 days (install ≤ 30 days, photos ≤ 7 days after) | Triggers the 70% payment |
-| 4 | Launch livery photo set (full bike in completed livery) | D0 + 45 days | All twelve lots installed |
+| 4 | Launch livery photo set (full bike in completed livery) | D0 + 45 days | All five lots installed |
 | 5 | Per-ride certificate (date, route, distance) | Within 7 days of every tour | GPS log attached to each |
 | 6 | Ride photo update with sponsor's lot in frame | Monthly | When the bike is on tour |
 | 7 | Archive access (public ride log, named and dated) | Continuous | Every tour published |
