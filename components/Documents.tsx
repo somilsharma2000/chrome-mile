@@ -60,7 +60,7 @@ export default function Documents() {
           {DOCS.map((d, i) => (
             <Reveal key={d.name} delay={i * 0.05}>
               <a
-                href={`https://github.com/somilsharma2000/chrome-yatra/blob/main/docs/${d.file}`}
+                href={`https://github.com/somilsharma2000/chrome-mile/blob/main/docs/${d.file}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block h-full rounded-lg border border-night-line bg-night p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-bone-muted/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
