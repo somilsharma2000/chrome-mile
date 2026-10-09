@@ -36,6 +36,11 @@ const DOCS = [
     file: "PITCH-KIT.md",
     desc: "The campaign's positioning, one-liners, outreach messages and objection handling — public on purpose.",
   },
+  {
+    name: "Photography Checklist",
+    file: "PHOTOGRAPHY-CHECKLIST.md",
+    desc: "How the actual machine gets photographed for the showroom — every shot, angle and file name. The showroom shows concept plates until these shots land.",
+  },
 ];
 
 export default function Documents() {
