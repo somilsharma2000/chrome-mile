@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { ZONES, TIER_PRICE } from "@/lib/zones";
 import Reveal from "@/components/Reveal";
-import { Upload, MapPin, RotateCw, Pause, Play, ZoomIn, ZoomOut } from "lucide-react";
+import { Upload, MapPin, Maximize, RotateCw, Pause, Play, ZoomIn, ZoomOut } from "lucide-react";
 
 type SceneState = { s: "waiting" | "loading" | "loaded" | "error" | "timeout"; msg?: string };
 
@@ -52,7 +52,7 @@ class SceneErrorBoundary extends React.Component<
 const Lot3DScene = dynamic(() => import("@/components/Lot3DScene"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-[460px] items-center justify-center text-sm text-bone-muted">
+    <div className="flex h-[520px] items-center justify-center text-sm text-bone-muted sm:h-[600px] lg:h-[660px]">
       Loading the machine…
     </div>
   ),
@@ -81,10 +81,34 @@ export default function Lot3DSection() {
   }, []);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoAll, setLogoAll] = useState(false);
-  const [view, setView] = useState("tank");
+  const [view, setView] = useState("hero");
   const [spinning, setSpinning] = useState(true);
   const [zoomCmd, setZoomCmd] = useState<{ n: number; dir: 1 | -1 }>({ n: 0, dir: 1 });
+  const [showMarkers, setShowMarkers] = useState(true);
+  const [isFull, setIsFull] = useState(false);
   const sceneState = useSceneState();
+
+  useEffect(() => {
+    const onZone = (e: Event) => {
+      const d = (e as CustomEvent<{ id: string; src?: string }>).detail;
+      if (!d || d.src !== "map" || !d.id) return;
+      setSelected(d.id);
+      setSpinning(false);
+      stageRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+    window.addEventListener("cm-zone", onZone as EventListener);
+    const onFs = () => setIsFull(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", onFs);
+    return () => {
+      window.removeEventListener("cm-zone", onZone as EventListener);
+      document.removeEventListener("fullscreenchange", onFs);
+    };
+  }, []);
+
+  const selectZone = (id: string) => {
+    setSelected(id);
+    window.dispatchEvent(new CustomEvent("cm-zone", { detail: { id, src: "showroom" } }));
+  };
 
   const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -101,7 +125,7 @@ export default function Lot3DSection() {
     sceneState.s === "error" || sceneState.s === "timeout";
 
   const fallbackPanel = (
-    <div className="fallback-glow relative flex h-[460px] flex-col items-center justify-center gap-3 rounded-lg border border-night-line bg-night px-6 text-center">
+    <div className="fallback-glow relative flex h-[520px] flex-col items-center justify-center gap-3 rounded-lg border border-night-line bg-night px-6 text-center sm:h-[600px] lg:h-[660px]">
       <MapPin size={28} className="text-accent" aria-hidden />
       <p className="font-display text-3xl tracking-wide chrome-text">
         LOT {zone.id} — {zone.name.toUpperCase()}
@@ -140,10 +164,10 @@ export default function Lot3DSection() {
         <div className="lg:col-span-2">
           <div
             ref={stageRef}
-            className="overflow-hidden rounded-lg border border-night-line bg-night"
+            className="relative overflow-hidden rounded-lg border border-night-line bg-night"
           >
             {!nearView ? (
-              <div className="flex h-[460px] items-center justify-center text-sm text-bone-muted">
+              <div className="flex h-[520px] items-center justify-center text-sm text-bone-muted sm:h-[600px] lg:h-[660px]">
                 The showroom loads as you scroll to it.
               </div>
             ) : threeDFailed ? (
@@ -154,7 +178,8 @@ export default function Lot3DSection() {
                   selected={selected}
                   logoUrl={logoUrl}
                   logoAll={logoAll}
-                  onSelect={setSelected}
+                  onSelect={selectZone}
+                  showMarkers={showMarkers}
                   view={view}
                   spinning={spinning}
                   zoomCmd={zoomCmd}
@@ -164,9 +189,10 @@ export default function Lot3DSection() {
             )}
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {[
-                { id: "front", label: "Front" },
+                { id: "hero", label: "Hero" },
+                { id: "side", label: "Side" },
                 { id: "tank", label: "Tank" },
                 { id: "rear", label: "Rear" },
                 { id: "top", label: "Top" },
@@ -177,7 +203,7 @@ export default function Lot3DSection() {
                     setView(v.id);
                     setSpinning(false);
                   }}
-                  className={`rounded-md border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
+                  className={`rounded-md border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
                     view === v.id
                       ? "border-accent/60 bg-accent/10 text-bone"
                       : "border-night-line text-bone-muted hover:border-bone-muted/40 hover:text-bone"
@@ -187,11 +213,34 @@ export default function Lot3DSection() {
                 </button>
               ))}
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => {
+                  setShowMarkers((m) => !m);
+                }}
+                aria-pressed={showMarkers}
+                className="inline-flex items-center gap-1.5 rounded-md border border-night-line px-3 py-2 text-xs font-semibold text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+              >
+                <MapPin size={13} aria-hidden />
+                {showMarkers ? "Hide markers" : "Show markers"}
+              </button>
+              <button
+                onClick={() => {
+                  const el = stageRef.current;
+                  if (!el) return;
+                  if (document.fullscreenElement) document.exitFullscreen();
+                  else el.requestFullscreen?.();
+                }}
+                aria-pressed={isFull}
+                className="inline-flex items-center gap-1.5 rounded-md border border-night-line px-3 py-2 text-xs font-semibold text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+              >
+                <Maximize size={13} aria-hidden />
+                {isFull ? "Exit full" : "Fullscreen"}
+              </button>
               <button
                 onClick={() => setSpinning((v) => !v)}
                 aria-pressed={spinning}
-                className="inline-flex items-center gap-1.5 rounded-md border border-night-line px-3 py-1.5 text-xs font-semibold text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+                className="inline-flex items-center gap-1.5 rounded-md border border-night-line px-3 py-2 text-xs font-semibold text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
               >
                 {spinning ? <Pause size={13} aria-hidden /> : <Play size={13} aria-hidden />}
                 {spinning ? "Pause turntable" : "Spin"}
@@ -199,23 +248,23 @@ export default function Lot3DSection() {
               <button
                 onClick={() => setZoomCmd((c) => ({ n: c.n + 1, dir: -1 }))}
                 aria-label="Zoom in"
-                className="rounded-md border border-night-line p-1.5 text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+                className="rounded-md border border-night-line p-2 text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
               >
                 <ZoomIn size={14} aria-hidden />
               </button>
               <button
                 onClick={() => setZoomCmd((c) => ({ n: c.n + 1, dir: 1 }))}
                 aria-label="Zoom out"
-                className="rounded-md border border-night-line p-1.5 text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+                className="rounded-md border border-night-line p-2 text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
               >
                 <ZoomOut size={14} aria-hidden />
               </button>
             </div>
           </div>
-          <p className="mt-2 text-xs text-bone-muted">
+          <p className="mt-3 text-sm text-bone-muted">
             Drag to spin · scroll to zoom · tap the bike itself or a marker to pick a lot
           </p>
-          <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-wider text-bone-muted/80">
+          <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-bone-muted/80">
             Concept preview — not to scale. Final artwork and installation subject to
             physical measurement, material compatibility, safety and required approvals.
           </p>
