@@ -82,7 +82,7 @@ export default function Lot3DSection() {
   const fallbackPanel = (
     <div className="fallback-glow relative flex h-[460px] flex-col items-center justify-center gap-3 rounded-lg border border-night-line bg-night px-6 text-center">
       <MapPin size={28} className="text-accent" aria-hidden />
-      <p className="font-display text-3xl tracking-wide text-bone">
+      <p className="font-display text-3xl tracking-wide chrome-text">
         LOT {zone.id} — {zone.name.toUpperCase()}
       </p>
       <p className="max-w-sm text-sm text-bone-muted">
@@ -108,7 +108,7 @@ export default function Lot3DSection() {
         <p className="text-xs font-semibold uppercase tracking-widest2 text-steel">
           The machine — live preview
         </p>
-        <h2 className="mt-3 font-display text-4xl tracking-wide text-bone sm:text-5xl">
+        <h2 className="mt-3 font-display text-4xl tracking-wide chrome-text sm:text-5xl">
           SEE YOUR MARK <span className="chrome-text">BEFORE YOU BID</span>
         </h2>
         <p className="mt-4 max-w-xl text-bone-muted">
@@ -187,13 +187,13 @@ export default function Lot3DSection() {
             <p className="text-xs font-semibold uppercase tracking-widest2 text-steel">
               Lot {zone.id} · {zone.tier}
             </p>
-            <h3 className="mt-1 font-display text-2xl tracking-wide text-bone">
+            <h3 className="mt-1 font-display text-2xl tracking-wide chrome-text">
               {zone.name}
             </h3>
             <p className="mt-1 text-sm text-bone-muted">
               {zone.where} · {zone.size}
             </p>
-            <p className="mt-3 font-display text-3xl tracking-wide text-bone">
+            <p className="mt-3 font-display text-3xl tracking-wide chrome-text">
               ₹{TIER_PRICE[zone.tier].toLocaleString("en-IN")}
               <span className="ml-1 text-xs text-bone-muted">opening</span>
             </p>
