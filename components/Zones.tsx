@@ -96,7 +96,7 @@ export default function Zones() {
                     </div>
                   </div>
                   <div className="flex shrink-0 items-center justify-between gap-4 sm:flex-col sm:items-end">
-                    <p className="font-display text-2xl tracking-wide text-bone">
+                    <p className="font-display text-2xl tracking-wide chrome-text">
                       ₹{TIER_PRICE[z.tier].toLocaleString("en-IN")}
                       <span className="ml-1 text-xs text-bone-muted">opening</span>
                     </p>
