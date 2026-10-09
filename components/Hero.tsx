@@ -30,7 +30,7 @@ export default function Hero() {
 
         <Reveal delay={0.08}>
           <h1 className="mt-5 max-w-4xl font-display text-6xl leading-[0.95] tracking-wide sm:text-8xl lg:text-9xl">
-            <span className="chrome-text">YOUR NAME ON CHROME.</span>
+            <span className="shimmer-text">YOUR NAME ON CHROME.</span>
             <br />
             <span className="text-accent">EVERY ROAD IN INDIA.</span>
           </h1>
@@ -57,7 +57,7 @@ export default function Hero() {
             <div className="flex flex-col justify-center gap-4">
               <a
                 href="#zones"
-                className="inline-flex w-fit items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="btn-shine inline-flex w-fit items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 View the lots
                 <ArrowDown size={18} aria-hidden />
