@@ -12,7 +12,7 @@ export default function Marquee() {
   return (
     <div
       aria-hidden
-      className="marquee overflow-hidden border-y border-white/5 bg-night-soft/50 py-4"
+      className="marquee -rotate-[1.2deg] scale-x-[1.03] overflow-hidden border-y border-white/5 bg-night-soft/80 py-4 backdrop-blur-sm"
     >
       <div className="marquee-track flex w-max items-center">
         {row.map((item, i) => (
