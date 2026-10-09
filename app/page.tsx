@@ -7,7 +7,7 @@ import Marquee from "@/components/Marquee";
 import StatsStrip from "@/components/StatsStrip";
 import RouteLine from "@/components/RouteLine";
 import ZoneMap from "@/components/ZoneMap";
-import Lot3DSection from "@/components/Lot3DSection";
+import Showroom from "@/components/Showroom";
 import Zones from "@/components/Zones";
 import HowItWorks from "@/components/HowItWorks";
 import SponsorKit from "@/components/SponsorKit";
@@ -31,7 +31,7 @@ export default function Home() {
         <StatsStrip />
         <RouteLine />
         <ZoneMap />
-        <Lot3DSection />
+        <Showroom />
         <Zones />
         <HowItWorks />
         <SponsorKit />
