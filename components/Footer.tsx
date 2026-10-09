@@ -7,7 +7,7 @@ export default function Footer() {
     <footer id="contact" className="border-t border-white/5">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <Reveal>
-          <h2 className="font-display text-4xl tracking-wide text-bone sm:text-6xl">
+          <h2 className="font-display text-4xl tracking-wide chrome-text sm:text-6xl">
             TWELVE LOTS. ONE MACHINE. <span className="text-accent">BID.</span>
           </h2>
           <p className="mt-4 max-w-lg text-bone-muted">
