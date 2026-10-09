@@ -15,8 +15,9 @@ const config: Config = {
           muted: "#A19D94",
         },
         accent: {
-          DEFAULT: "#D6402B",
-          hover: "#B8351F",
+          // darkened for WCAG AA: bone text on accent = 4.9:1 (was 3.7:1)
+          DEFAULT: "#B8321D",
+          hover: "#9E2B18",
         },
       },
       fontFamily: {
