@@ -1,4 +1,32 @@
+"use client";
+
 import Reveal from "@/components/Reveal";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const srx = useSpring(rx, { stiffness: 300, damping: 24 });
+  const sry = useSpring(ry, { stiffness: 300, damping: 24 });
+  return (
+    <motion.div
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        ry.set(((e.clientX - r.left) / r.width - 0.5) * 7);
+        rx.set(-((e.clientY - r.top) / r.height - 0.5) * 7);
+      }}
+      onMouseLeave={() => {
+        rx.set(0);
+        ry.set(0);
+      }}
+      style={{ rotateX: srx, rotateY: sry, transformPerspective: 1000 }}
+      className="h-full will-change-transform"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 import { TIER_BLURB, TIER_PRICE, ZONES, waBidLink } from "@/lib/zones";
 import { ArrowRight, Ruler } from "lucide-react";
 
@@ -39,6 +67,7 @@ export default function Zones() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {ZONES.filter((z) => z.tier === tier).map((z, i) => (
               <Reveal key={z.id} delay={i * 0.04}>
+                <TiltCard>
                 <article
                   id={`zone-${z.id}`}
                   className="group flex h-full flex-col justify-between gap-4 rounded-lg border border-night-line bg-night-soft p-5 lot-glow transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 sm:flex-row sm:items-center"
@@ -83,6 +112,7 @@ export default function Zones() {
                     </a>
                   </div>
                 </article>
+                </TiltCard>
               </Reveal>
             ))}
           </div>
