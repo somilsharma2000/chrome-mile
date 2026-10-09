@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import React from "react";
-import { ZONES, TIER_PRICE, waBidLink } from "@/lib/zones";
+import { ZONES, TIER_PRICE } from "@/lib/zones";
 import Reveal from "@/components/Reveal";
-import { Upload, MessageCircle, MapPin, RotateCw, Pause, Play, ZoomIn, ZoomOut } from "lucide-react";
+import { Upload, MapPin, RotateCw, Pause, Play, ZoomIn, ZoomOut } from "lucide-react";
 
 type SceneState = { s: "waiting" | "loading" | "loaded" | "error" | "timeout"; msg?: string };
 
@@ -95,13 +95,10 @@ export default function Lot3DSection() {
         changes.
       </p>
       <a
-        href={waBidLink(zone)}
-        target="_blank"
-        rel="noopener noreferrer"
+        href="#how"
         className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover"
       >
-        <MessageCircle size={15} aria-hidden />
-        Bid on this lot
+        How bidding works
       </a>
     </div>
   );
@@ -284,13 +281,10 @@ export default function Lot3DSection() {
               <span className="ml-1 text-xs text-bone-muted">opening</span>
             </p>
             <a
-              href={waBidLink(zone)}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#how"
               className="btn-shine mt-4 inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover"
             >
-              <MessageCircle size={15} aria-hidden />
-              Bid on this lot
+              How bidding works
             </a>
           </div>
         </div>
