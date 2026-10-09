@@ -1,11 +1,11 @@
-# Chrome Yatra — Sponsor Agreement (sample terms)
+# Chrome Mile — Sponsor Agreement (sample terms)
 
 This is the plain-English agreement signed by every lot winner. It is a
 working sample: both parties are free to have their own counsel review and
 amend it before signing.
 
 ## Parties
-- **Campaign:** Chrome Yatra, operated by [Founder legal name], ("Licensor")
+- **Campaign:** Chrome Mile, operated by [Founder legal name], ("Licensor")
 - **Sponsor:** [Brand legal name], GSTIN __________ ("Licensee")
 
 ## 1. The lot
