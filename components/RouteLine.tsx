@@ -3,7 +3,7 @@ export default function RouteLine() {
     <div aria-hidden className="relative mx-auto mt-4 max-w-6xl px-4 sm:px-6">
       <div className="relative flex h-10 items-center">
         <span className="absolute left-0 hidden pr-3 text-[10px] uppercase tracking-widest2 text-bone-muted sm:block">
-          The yatra
+          The mile
         </span>
         <svg
           className="h-6 w-full overflow-visible"
