@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import Countdown from "@/components/Countdown";
 import { LOTS_CLAIMED, LOTS_TOTAL, waGeneral } from "@/lib/zones";
 import { ArrowDown, ChevronDown } from "lucide-react";
+import Magnetic from "@/components/Magnetic";
 
 const pct = (LOTS_CLAIMED / LOTS_TOTAL) * 100;
 
@@ -79,13 +80,15 @@ export default function Hero() {
               <Countdown />
             </div>
             <div className="flex flex-col justify-center gap-4">
-              <a
-                href="#zones"
-                className="btn-shine inline-flex w-fit items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                View the lots
-                <ArrowDown size={18} aria-hidden />
-              </a>
+              <Magnetic>
+                <a
+                  href="#zones"
+                  className="btn-shine inline-flex w-fit items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  View the lots
+                  <ArrowDown size={18} aria-hidden />
+                </a>
+              </Magnetic>
               <a
                 href={waGeneral}
                 target="_blank"
@@ -127,6 +130,17 @@ export default function Hero() {
           </div>
         </Reveal>
       </motion.div>
+
+      <div aria-hidden className="pointer-events-none absolute top-1/2 left-6 hidden -translate-y-1/2 lg:block">
+        <p className="text-[10px] uppercase tracking-[0.35em] text-bone-muted/60" style={{ writingMode: "vertical-rl" }}>
+          GT 650 · MR. CLEAN · 648CC · 46.8 BHP
+        </p>
+      </div>
+      <div aria-hidden className="pointer-events-none absolute top-1/2 right-6 hidden -translate-y-1/2 lg:block">
+        <p className="text-[10px] uppercase tracking-[0.35em] text-bone-muted/60" style={{ writingMode: "vertical-rl" }}>
+          12 LOTS · ONE BRAND EACH · EST. 2027
+        </p>
+      </div>
 
       <motion.div
         className="absolute bottom-6 left-1/2 -translate-x-1/2"
