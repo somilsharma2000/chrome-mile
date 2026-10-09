@@ -1,23 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { ZONES, TIER_PRICE, waBidLink } from "@/lib/zones";
 import Reveal from "@/components/Reveal";
-import { useProgress } from "@react-three/drei";
 import { Upload, MessageCircle } from "lucide-react";
 
 
 
 function LoadProbe() {
-  const { active, progress, errors, item } = useProgress();
-  return (
-    <p className="text-[10px] text-bone-muted">
-      3D probe: {active ? `loading ${progress.toFixed(0)}% ${item ?? ""}` : "idle"}{" "}
-      {errors.length > 0 && `ERROR: ${errors.join(" | ")}`}
-    </p>
-  );
+  const [status, setStatus] = useState<string>("3D probe: waiting");
+  useEffect(() => {
+    const h = (e: Event) => {
+      const d = (e as CustomEvent).detail as { status: string; message?: string };
+      setStatus(`3D probe: ${d.status}${d.message ? ` — ${d.message}` : ""}`);
+    };
+    window.addEventListener("cy-bike-status", h);
+    return () => window.removeEventListener("cy-bike-status", h);
+  }, []);
+  return <p className="text-[10px] text-bone-muted">{status}</p>;
 }
 
 class SceneErrorBoundary extends React.Component<
