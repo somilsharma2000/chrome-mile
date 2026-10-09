@@ -1,3 +1,5 @@
+"use client";
+
 import { TIER_PRICE, ZONES } from "@/lib/zones";
 
 const TIER_FILL: Record<string, string> = {
@@ -58,8 +60,25 @@ export default function ZoneMap() {
             <path d="M 470 126 C 452 158 452 192 468 204 L 520 204 C 534 188 530 138 518 122 Z" fill="#16161A" stroke="#9A9AA2" strokeWidth="2.5" />
 
             {ZONES.map((z) => (
-              <a key={z.id} href={`#zone-${z.id}`}>
-                <g style={{ cursor: "pointer" }}>
+              <g
+                key={z.id}
+                style={{ cursor: "pointer" }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Open lot ${z.id} ${z.name} in the showroom`}
+                onClick={() =>
+                  window.dispatchEvent(
+                    new CustomEvent("cm-zone", { detail: { id: z.id, src: "map" } })
+                  )
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    window.dispatchEvent(
+                      new CustomEvent("cm-zone", { detail: { id: z.id, src: "map" } })
+                    );
+                  }
+                }}
+              >
                   <circle aria-hidden className="zone-pulse" cx={z.x} cy={z.y} r="15" fill="none" stroke={TIER_FILL[z.tier]} strokeWidth="2" />
                   <circle cx={z.x} cy={z.y} r="15" fill={TIER_FILL[z.tier]} />
                   <text
@@ -72,8 +91,7 @@ export default function ZoneMap() {
                   >
                     {z.id}
                   </text>
-                </g>
-              </a>
+              </g>
             ))}
           </svg>
         </div>
