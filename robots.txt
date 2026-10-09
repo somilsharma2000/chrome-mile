@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://somilsharma2000.github.io/chrome-mile/sitemap.xml
