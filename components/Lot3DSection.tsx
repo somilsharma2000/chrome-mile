@@ -105,7 +105,7 @@ export default function Lot3DSection() {
   return (
     <section id="machine" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
       <Reveal>
-        <p className="text-xs font-semibold uppercase tracking-widest2 text-accent">
+        <p className="text-xs font-semibold uppercase tracking-widest2 text-steel">
           The machine — live preview
         </p>
         <h2 className="mt-3 font-display text-4xl tracking-wide text-bone sm:text-5xl">
@@ -184,7 +184,7 @@ export default function Lot3DSection() {
           </div>
 
           <div className="mt-auto">
-            <p className="text-xs font-semibold uppercase tracking-widest2 text-accent">
+            <p className="text-xs font-semibold uppercase tracking-widest2 text-steel">
               Lot {zone.id} · {zone.tier}
             </p>
             <h3 className="mt-1 font-display text-2xl tracking-wide text-bone">
