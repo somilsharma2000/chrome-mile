@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useState, type ReactNode } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, ContactShadows } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -185,25 +185,35 @@ export default function Lot3DScene({
   logoUrl: string | null;
   onSelect: (id: string) => void;
 }) {
+  const envOnCreated = ({
+    gl,
+    scene,
+  }: {
+    gl: THREE.WebGLRenderer;
+    scene: THREE.Scene;
+  }) => {
+    try {
+      const pmrem = new THREE.PMREMGenerator(gl);
+      const env = pmrem.fromScene(new RoomEnvironment(), 0.04);
+      scene.environment = env.texture;
+      pmrem.dispose();
+    } catch {
+      // env is polish, not critical — lights carry the scene
+    }
+  };
+
   return (
     <Canvas
       camera={{ position: [2.4, 1.35, 2.9], fov: 32 }}
       style={{ height: 460 }}
       shadows
-      onCreated={({ gl, scene }) => {
-        const pmrem = new THREE.PMREMGenerator(gl);
-        const env = pmrem.fromScene(new RoomEnvironment(), 0.04);
-        scene.environment = env.texture;
-        pmrem.dispose();
-      }}
+      onCreated={envOnCreated}
     >
       <color attach="background" args={["#0a0a0b"]} />
       <ambientLight intensity={0.75} />
       <directionalLight position={[4, 6, 3]} intensity={1.4} castShadow />
       <directionalLight position={[-4, 2, -4]} intensity={0.6} color="#99aabb" />
       <directionalLight position={[0, 3, -6]} intensity={1.0} color="#aabbdd" />
-      <spotLight position={[0, 5, 0]} intensity={0.9} angle={0.7} penumbra={1} />
-
 
       <Suspense fallback={null}>
         <Bike />
