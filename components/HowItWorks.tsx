@@ -7,7 +7,7 @@ export default function HowItWorks() {
     <section id="how" className="border-y border-white/5 bg-night-soft/50">
       <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-widest2 text-accent">
+          <p className="text-xs font-semibold uppercase tracking-widest2 text-steel">
             How it works
           </p>
           <h2 className="mt-3 font-display text-4xl tracking-wide text-bone sm:text-5xl">
