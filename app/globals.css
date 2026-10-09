@@ -39,3 +39,72 @@ body {
     radial-gradient(60% 50% at 70% 10%, rgba(255, 255, 255, 0.06), transparent 60%),
     #121214;
 }
+
+
+/* ---- Motion layer (Chrome Yatra) ---- */
+
+/* Animated chrome shimmer for hero headline */
+@keyframes shimmer-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.shimmer-text {
+  background: linear-gradient(110deg, #ececef 20%, #ffffff 38%, #9a9aa2 50%, #ffffff 62%, #ececef 80%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-sweep 7s linear infinite;
+}
+
+/* Infinite marquee ticker */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 36s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Lot card hover glow */
+.lot-glow {
+  transition: box-shadow 0.25s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.lot-glow:hover {
+  box-shadow: 0 18px 50px -20px rgba(214, 64, 43, 0.45);
+}
+
+/* Button shine sweep */
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 55%;
+  height: 100%;
+  transform: skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transition: left 0.5s ease;
+}
+.btn-shine:hover::after { left: 135%; }
+
+/* Fallback panel breathing gradient */
+@keyframes float-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.85; }
+}
+.fallback-glow {
+  background: radial-gradient(45% 40% at 50% 45%, rgba(214, 64, 43, 0.16), transparent 70%);
+  animation: float-glow 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track, .shimmer-text, .fallback-glow { animation: none; }
+  .btn-shine::after { display: none; }
+  html { scroll-behavior: auto; }
+}
