@@ -5,42 +5,46 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { ZONES, TIER_PRICE, waBidLink } from "@/lib/zones";
 import Reveal from "@/components/Reveal";
-import { Upload, MessageCircle } from "lucide-react";
+import { Upload, MessageCircle, MapPin } from "lucide-react";
 
+type SceneState = { s: "waiting" | "loading" | "loaded" | "error" | "timeout"; msg?: string };
 
-
-function LoadProbe() {
-  const [status, setStatus] = useState<string>("3D probe: waiting");
+function useSceneState(): SceneState {
+  const [state, setState] = useState<SceneState>({ s: "waiting" });
   useEffect(() => {
     const h = (e: Event) => {
       const d = (e as CustomEvent).detail as { status: string; message?: string };
-      setStatus(`3D probe: ${d.status}${d.message ? ` — ${d.message}` : ""}`);
+      if (d.status === "loading") setState({ s: "loading" });
+      else if (d.status === "loaded") setState({ s: "loaded" });
+      else if (d.status === "error") setState({ s: "error", msg: d.message });
     };
     window.addEventListener("cy-bike-status", h);
-    return () => window.removeEventListener("cy-bike-status", h);
+    const t = window.setTimeout(() => {
+      setState((cur) =>
+        cur.s === "waiting" || cur.s === "loading" ? { s: "timeout" } : cur
+      );
+    }, 15000);
+    return () => {
+      window.removeEventListener("cy-bike-status", h);
+      window.clearTimeout(t);
+    };
   }, []);
-  return <p className="text-[10px] text-bone-muted">{status}</p>;
+  return state;
 }
 
 class SceneErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { error: string | null }
+  { children: React.ReactNode; fallback: React.ReactNode },
+  { failed: boolean }
 > {
-  constructor(props: { children: React.ReactNode }) {
+  constructor(props: { children: React.ReactNode; fallback: React.ReactNode }) {
     super(props);
-    this.state = { error: null };
+    this.state = { failed: false };
   }
-  static getDerivedStateFromError(e: unknown) {
-    return { error: e instanceof Error ? e.message : String(e) };
+  static getDerivedStateFromError() {
+    return { failed: true };
   }
   render() {
-    if (this.state.error) {
-      return (
-        <pre className="m-4 whitespace-pre-wrap rounded-md border border-accent/50 bg-accent/10 p-4 text-xs text-bone">
-          3D viewer error: {this.state.error}
-        </pre>
-      );
-    }
+    if (this.state.failed) return this.props.fallback;
     return this.props.children;
   }
 }
@@ -54,12 +58,12 @@ const Lot3DScene = dynamic(() => import("@/components/Lot3DScene"), {
   ),
 });
 
-// lots that can be previewed in 3D (bike surfaces)
 const PREVIEWABLE = ["T1", "F3", "D1", "D2", "D3"];
 
 export default function Lot3DSection() {
   const [selected, setSelected] = useState("T1");
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const sceneState = useSceneState();
 
   const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -72,6 +76,31 @@ export default function Lot3DSection() {
   };
 
   const zone = ZONES.find((z) => z.id === selected)!;
+  const threeDFailed =
+    sceneState.s === "error" || sceneState.s === "timeout";
+
+  const fallbackPanel = (
+    <div className="fallback-glow relative flex h-[460px] flex-col items-center justify-center gap-3 rounded-lg border border-night-line bg-night px-6 text-center">
+      <MapPin size={28} className="text-accent" aria-hidden />
+      <p className="font-display text-3xl tracking-wide text-bone">
+        LOT {zone.id} — {zone.name.toUpperCase()}
+      </p>
+      <p className="max-w-sm text-sm text-bone-muted">
+        The live 3D spin isn&apos;t available on this device — the lot map
+        above shows every placement and exact size. Nothing about your bid
+        changes.
+      </p>
+      <a
+        href={waBidLink(zone)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover"
+      >
+        <MessageCircle size={15} aria-hidden />
+        Bid on this lot
+      </a>
+    </div>
+  );
 
   return (
     <section id="machine" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
@@ -92,11 +121,18 @@ export default function Lot3DSection() {
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <div className="overflow-hidden rounded-lg border border-night-line bg-night">
-            <SceneErrorBoundary>
-              <Lot3DScene selected={selected} logoUrl={logoUrl} onSelect={setSelected} />
-            </SceneErrorBoundary>
+            {threeDFailed ? (
+              fallbackPanel
+            ) : (
+              <SceneErrorBoundary fallback={fallbackPanel}>
+                <Lot3DScene
+                  selected={selected}
+                  logoUrl={logoUrl}
+                  onSelect={setSelected}
+                />
+              </SceneErrorBoundary>
+            )}
           </div>
-          <LoadProbe />
           <p className="mt-2 text-xs text-bone-muted">
             Drag to spin · scroll to zoom · tap a marker to select the lot ·
             preview is illustrative; exact sizes are fixed per lot
@@ -165,7 +201,7 @@ export default function Lot3DSection() {
               href={waBidLink(zone)}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover"
+              className="btn-shine mt-4 inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover"
             >
               <MessageCircle size={15} aria-hidden />
               Bid on this lot
