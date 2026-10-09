@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { ZONES, TIER_PRICE, waBidLink } from "@/lib/zones";
 import Reveal from "@/components/Reveal";
-import { Upload, MessageCircle, MapPin } from "lucide-react";
+import { Upload, MessageCircle, MapPin, RotateCw, Pause, Play, ZoomIn, ZoomOut } from "lucide-react";
 
 type SceneState = { s: "waiting" | "loading" | "loaded" | "error" | "timeout"; msg?: string };
 
@@ -64,6 +64,9 @@ export default function Lot3DSection() {
   const [selected, setSelected] = useState("T1");
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [logoAll, setLogoAll] = useState(false);
+  const [view, setView] = useState("tank");
+  const [spinning, setSpinning] = useState(true);
+  const [zoomCmd, setZoomCmd] = useState<{ n: number; dir: 1 | -1 }>({ n: 0, dir: 1 });
   const sceneState = useSceneState();
 
   const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +116,7 @@ export default function Lot3DSection() {
           SEE YOUR MARK <span className="chrome-text">BEFORE YOU BID</span>
         </h2>
         <p className="mt-4 max-w-xl text-bone-muted">
-          Upload your logo, tap the machine, and watch it ride. Drag to spin the
+          Upload your logo, tap the machine, and walk around it like you're in the showroom.
           machine at any angle. Rider-kit and pannier lots live on the 2D lot
           map above.
         </p>
@@ -131,9 +134,62 @@ export default function Lot3DSection() {
                   logoUrl={logoUrl}
                   logoAll={logoAll}
                   onSelect={setSelected}
+                  view={view}
+                  spinning={spinning}
+                  zoomCmd={zoomCmd}
+                  onUserStart={() => setSpinning(false)}
                 />
               </SceneErrorBoundary>
             )}
+          </div>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { id: "front", label: "Front" },
+                { id: "tank", label: "Tank" },
+                { id: "rear", label: "Rear" },
+                { id: "top", label: "Top" },
+              ].map((v) => (
+                <button
+                  key={v.id}
+                  onClick={() => {
+                    setView(v.id);
+                    setSpinning(false);
+                  }}
+                  className={`rounded-md border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
+                    view === v.id
+                      ? "border-accent/60 bg-accent/10 text-bone"
+                      : "border-night-line text-bone-muted hover:border-bone-muted/40 hover:text-bone"
+                  }`}
+                >
+                  {v.label}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setSpinning((v) => !v)}
+                aria-pressed={spinning}
+                className="inline-flex items-center gap-1.5 rounded-md border border-night-line px-3 py-1.5 text-xs font-semibold text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+              >
+                {spinning ? <Pause size={13} aria-hidden /> : <Play size={13} aria-hidden />}
+                {spinning ? "Pause turntable" : "Spin"}
+              </button>
+              <button
+                onClick={() => setZoomCmd((c) => ({ n: c.n + 1, dir: -1 }))}
+                aria-label="Zoom in"
+                className="rounded-md border border-night-line p-1.5 text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+              >
+                <ZoomIn size={14} aria-hidden />
+              </button>
+              <button
+                onClick={() => setZoomCmd((c) => ({ n: c.n + 1, dir: 1 }))}
+                aria-label="Zoom out"
+                className="rounded-md border border-night-line p-1.5 text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+              >
+                <ZoomOut size={14} aria-hidden />
+              </button>
+            </div>
           </div>
           <p className="mt-2 text-xs text-bone-muted">
             Drag to spin · scroll to zoom · tap the bike itself or a marker to pick a lot ·
