@@ -21,7 +21,7 @@ export default function HowItWorks() {
               icon: Gavel,
               n: "01",
               title: "Claim your lot",
-              text: `A ₹${BIDDER_DEPOSIT_INR.toLocaleString("en-IN")} refundable deposit gets you a Bidder ID. Bid on WhatsApp, confirmed the same day, notified instantly if you're outbid. Bidding closes 26 January 2027 with a 5-minute soft close — no sniping, no games.`,
+              text: `A refundable ₹2,000 deposit gets you a Bidder ID when registration opens on the Chrome Mile platform. Every bid is confirmed in writing the same day, and you're notified instantly if you're outbid. Bidding closes 26 January 2027 with a 5-minute soft close — no sniping, no games.`,
             },
             {
               icon: BadgeCheck,
