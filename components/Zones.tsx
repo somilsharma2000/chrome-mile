@@ -27,7 +27,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-import { TIER_BLURB, TIER_PRICE, ZONES, waBidLink } from "@/lib/zones";
+import { TIER_BLURB, TIER_PRICE, ZONES } from "@/lib/zones";
 import { ArrowRight, Ruler } from "lucide-react";
 
 const TIER_ORDER = ["Title", "Feature", "Detail"] as const;
@@ -101,10 +101,8 @@ export default function Zones() {
                       <span className="ml-1 text-xs text-bone-muted">opening</span>
                     </p>
                     <a
-                      href={waBidLink(z)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Bid on lot ${z.id}, ${z.name}`}
+                      href="#how"
+                      aria-label={`How bidding works for lot ${z.id}, ${z.name}`}
                       className="inline-flex items-center gap-1 rounded-md bg-accent px-3.5 py-2 text-sm font-semibold text-bone transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
                       Bid
