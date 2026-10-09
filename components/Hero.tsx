@@ -1,26 +1,50 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import Countdown from "@/components/Countdown";
 import { LOTS_CLAIMED, LOTS_TOTAL, waGeneral } from "@/lib/zones";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ChevronDown } from "lucide-react";
 
 const pct = (LOTS_CLAIMED / LOTS_TOTAL) * 100;
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const yBg = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const yContent = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
     <section
       id="top"
+      ref={ref}
       className="relative flex min-h-screen items-center overflow-hidden race-grid"
     >
-      <div
+      <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(55% 45% at 72% 18%, rgba(255,255,255,0.07), transparent 65%), radial-gradient(40% 35% at 15% 85%, rgba(214,64,43,0.12), transparent 70%)",
-        }}
-      />
+        style={{ y: yBg }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(55% 45% at 72% 18%, rgba(255,255,255,0.07), transparent 65%), radial-gradient(40% 35% at 15% 85%, rgba(214,64,43,0.12), transparent 70%)",
+          }}
+        />
+        <div className="orb orb-a" />
+        <div className="orb orb-b" />
+      </motion.div>
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 pt-28 pb-16 sm:px-6">
+      <motion.div
+        className="relative mx-auto w-full max-w-6xl px-4 pt-28 pb-16 sm:px-6"
+        style={{ y: yContent, opacity: fade }}
+      >
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-widest2 text-bone-muted">
             Chrome Yatra — the livery that rides India · A Royal Enfield
@@ -79,7 +103,8 @@ export default function Hero() {
             <div className="flex items-end justify-between text-sm">
               <p className="text-bone-muted">The livery — live claim status</p>
               <p className="font-display text-xl tracking-wide text-bone">
-                {LOTS_CLAIMED} <span className="text-bone-muted">of {LOTS_TOTAL} lots claimed</span>
+                {LOTS_CLAIMED}{" "}
+                <span className="text-bone-muted">of {LOTS_TOTAL} lots claimed</span>
               </p>
             </div>
             <div
@@ -90,7 +115,10 @@ export default function Hero() {
               aria-label="Lots claimed"
               className="mt-2 h-2 overflow-hidden rounded-full bg-night-line"
             >
-              <div className="h-full bg-accent" style={{ width: `${pct}%` }} />
+              <div
+                className="h-full bg-accent transition-[width] duration-700"
+                style={{ width: `${pct}%` }}
+              />
             </div>
             <p className="mt-2 text-xs text-bone-muted">
               Live numbers only, no projections · the machine ships only in
@@ -98,7 +126,18 @@ export default function Hero() {
             </p>
           </div>
         </Reveal>
-      </div>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2"
+        style={{ opacity: fade }}
+        aria-hidden
+      >
+        <div className="flex flex-col items-center gap-1 text-bone-muted">
+          <span className="text-[10px] uppercase tracking-widest2">Scroll</span>
+          <ChevronDown size={16} className="bounce-cue" />
+        </div>
+      </motion.div>
     </section>
   );
 }
