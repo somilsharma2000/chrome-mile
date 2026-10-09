@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Chrome Mile — asset calibration sheet</title>
+<style>
+  body { margin:0; background:#0B0B0C; color:#F2EEE3; font-family: system-ui, sans-serif; padding:24px; }
+  h1 { font-size:18px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 4px; }
+  p { color:#A8A396; font-size:13px; max-width:720px; line-height:1.6; margin:4px 0 18px; }
+  .wrap { position:relative; max-width:1100px; border:1px solid #28282E; overflow:hidden; }
+  .wrap img { display:block; width:100%; }
+  .grid { position:absolute; inset:0; pointer-events:none; }
+  .vline,.hline { position:absolute; background:rgba(228,90,30,.28); }
+  .vline { top:0; bottom:0; width:1px; }
+  .hline { left:0; right:0; height:1px; }
+  .lbl { position:absolute; font:11px/1 monospace; color:#F2EEE3; background:rgba(11,11,12,.75); padding:2px 4px; border-radius:2px; }
+  .xlbl { top:2px; transform:translateX(-50%); }
+  .ylbl { left:2px; transform:translateY(-50%); }
+</style>
+</head>
+<body>
+<h1>Chrome Mile — asset calibration sheet</h1>
+<p>Tool for the operator: swap <code>public/concept/gt650-hero.jpg</code> for a new asset, then read the
+x/y percentage for each surface from this grid and paste it into <code>lib/concept.ts</code>
+(MACHINE_LOTS hotspots &amp; placements). Grid lines every 10% — numbers are percentages from the
+top-left corner. Not part of the public experience (noindex, unlinked).</p>
+<div class="wrap">
+  <img src="gt650-hero.jpg" alt="Concept asset under calibration" />
+  <div class="grid" id="grid"></div>
+</div>
+<script>
+  const g = document.getElementById('grid');
+  for (let i = 1; i < 10; i++) {
+    const v = document.createElement('div'); v.className = 'vline'; v.style.left = i*10 + '%'; g.appendChild(v);
+    const h = document.createElement('div'); h.className = 'hline'; h.style.top = i*10 + '%'; g.appendChild(h);
+    const xl = document.createElement('div'); xl.className = 'lbl xlbl'; xl.style.left = i*10 + '%'; xl.textContent = i*10 + '%'; g.appendChild(xl);
+    const yl = document.createElement('div'); yl.className = 'lbl ylbl'; yl.style.top = i*10 + '%'; yl.textContent = i*10 + '%'; g.appendChild(yl);
+  }
+</script>
+</body>
+</html>
