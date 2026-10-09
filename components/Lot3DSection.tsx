@@ -63,6 +63,7 @@ const PREVIEWABLE = ["T1", "F3", "D1", "D2", "D3"];
 export default function Lot3DSection() {
   const [selected, setSelected] = useState("T1");
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [logoAll, setLogoAll] = useState(false);
   const sceneState = useSceneState();
 
   const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,7 +113,7 @@ export default function Lot3DSection() {
           SEE YOUR MARK <span className="chrome-text">BEFORE YOU BID</span>
         </h2>
         <p className="mt-4 max-w-xl text-bone-muted">
-          Upload your logo, pick a lot, and watch it ride. Drag to spin the
+          Upload your logo, tap the machine, and watch it ride. Drag to spin the
           machine at any angle. Rider-kit and pannier lots live on the 2D lot
           map above.
         </p>
@@ -128,13 +129,14 @@ export default function Lot3DSection() {
                 <Lot3DScene
                   selected={selected}
                   logoUrl={logoUrl}
+                  logoAll={logoAll}
                   onSelect={setSelected}
                 />
               </SceneErrorBoundary>
             )}
           </div>
           <p className="mt-2 text-xs text-bone-muted">
-            Drag to spin · scroll to zoom · tap a marker to select the lot ·
+            Drag to spin · scroll to zoom · tap the bike itself or a marker to pick a lot ·
             preview is illustrative; exact sizes are fixed per lot
           </p>
         </div>
@@ -157,6 +159,31 @@ export default function Lot3DSection() {
               />
             </label>
           </div>
+
+          {logoUrl && (
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setLogoAll((v) => !v)}
+                aria-pressed={logoAll}
+                className={`rounded-md border px-3.5 py-2 text-sm font-semibold transition-colors ${
+                  logoAll
+                    ? "border-accent/60 bg-accent/10 text-bone"
+                    : "border-night-line text-bone-muted hover:border-bone-muted/40 hover:text-bone"
+                }`}
+              >
+                {logoAll ? "✓ On every lot" : "Show on every lot"}
+              </button>
+              <button
+                onClick={() => {
+                  setLogoUrl(null);
+                  setLogoAll(false);
+                }}
+                className="rounded-md border border-night-line px-3.5 py-2 text-sm font-semibold text-bone-muted transition-colors hover:border-bone-muted/40 hover:text-bone"
+              >
+                Clear logo
+              </button>
+            </div>
+          )}
 
           <div>
             <p className="mb-2 text-xs font-semibold uppercase tracking-widest2 text-bone-muted">
