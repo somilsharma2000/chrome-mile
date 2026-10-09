@@ -8,7 +8,7 @@
 Five proposed machine placements — one brand each, no co-branding, no rotation.
 
 ## Title tier
-The two largest, most photographed surfaces in the livery.
+The single most photographed surface in the livery — the tank flanks.
 
 | Lot | Placement | Where | Size (proposed) |
 |---|---|---|---|
