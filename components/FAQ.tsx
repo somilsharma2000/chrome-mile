@@ -4,7 +4,7 @@ import { BIDDER_DEPOSIT_INR } from "@/lib/zones";
 const FAQS = [
   {
     q: "How do I bid?",
-    a: `Tap Bid on any lot — it opens WhatsApp with the lot pre-filled. A ₹${BIDDER_DEPOSIT_INR.toLocaleString("en-IN")} refundable deposit gets you a Bidder ID, then bid your amount. Bids above ₹25,000 require a GSTIN or PAN for verification.`,
+    a: `Bidder registration opens on the Chrome Mile platform ahead of the auction window. A refundable ₹2,000 deposit gets you a Bidder ID, then bid on any lot with same-day written confirmation and instant outbid notice. Bids above ₹25,000 require a GSTIN or PAN for verification.`,
   },
   {
     q: "What exactly do I own?",
@@ -36,7 +36,7 @@ const FAQS = [
   },
   {
     q: "Is this affiliated with Royal Enfield?",
-    a: "No. Chrome Yatra is an independent campaign, not affiliated with or endorsed by Royal Enfield or Eicher Motors.",
+    a: "No. Chrome Mile is an independent campaign, not affiliated with or endorsed by Royal Enfield or Eicher Motors.",
   },
 ];
 
