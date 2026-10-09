@@ -36,7 +36,7 @@ export default function Zones() {
   return (
     <section id="zones" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
       <Reveal>
-        <p className="text-xs font-semibold uppercase tracking-widest2 text-accent">
+        <p className="text-xs font-semibold uppercase tracking-widest2 text-steel">
           The lots
         </p>
         <h2 className="mt-3 font-display text-4xl tracking-wide text-bone sm:text-5xl">
