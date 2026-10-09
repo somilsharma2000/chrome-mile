@@ -2,9 +2,34 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import React from "react";
 import { ZONES, TIER_PRICE, waBidLink } from "@/lib/zones";
 import Reveal from "@/components/Reveal";
 import { Upload, MessageCircle } from "lucide-react";
+
+
+class SceneErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { error: string | null }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(e: unknown) {
+    return { error: e instanceof Error ? e.message : String(e) };
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <pre className="m-4 whitespace-pre-wrap rounded-md border border-accent/50 bg-accent/10 p-4 text-xs text-bone">
+          3D viewer error: {this.state.error}
+        </pre>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 const Lot3DScene = dynamic(() => import("@/components/Lot3DScene"), {
   ssr: false,
@@ -53,7 +78,9 @@ export default function Lot3DSection() {
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <div className="overflow-hidden rounded-lg border border-night-line bg-night">
-            <Lot3DScene selected={selected} logoUrl={logoUrl} onSelect={setSelected} />
+            <SceneErrorBoundary>
+              <Lot3DScene selected={selected} logoUrl={logoUrl} onSelect={setSelected} />
+            </SceneErrorBoundary>
           </div>
           <p className="mt-2 text-xs text-bone-muted">
             Drag to spin · scroll to zoom · tap a marker to select the lot ·
