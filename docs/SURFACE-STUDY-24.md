@@ -8,8 +8,8 @@
 The original 24-surface inventory from the campaign's first model — deleted
 from the app inventory in an operator error, recovered in full from git
 history (commit 92194c81) and from the app database, and preserved here as
-a research source. Nothing is lost. These 24 records also live in the
-Base44 app's ZoneInventory marked "ARCHIVED — SURFACE STUDY".
+a research source. Nothing is lost. These 24 records are preserved here — in this repository's own history,
+the campaign's durable, vendor-free home.
 
 ## The original inventory
 

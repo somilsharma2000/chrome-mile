@@ -32,21 +32,20 @@ none of it to stay live. Order = dependency order.
 1. **Bid intake form** — replaces the current "#how" CTAs. Stores bidder
    registrations in a Bids entity (brand, contact, lot, amount, deposit status).
 2. **Payment collection** — deposit links + winner invoices via the chosen
-   provider. Keys go in admin secrets, never in site code.
+   provider. Secrets live only in the backend's secret store, never in site code.
 3. **Leaderboard** — reads real bid data only. Zero bids = "No bids yet".
-4. **Notifications** — outbid + close alerts via email connector.
-5. **Analytics** — GA4 property per deployment, connected from admin.
+4. **Notifications** — outbid + close alerts via an email service.
+5. **Analytics** — GA4 property per deployment, wired in at connect time.
 
-## 3. Credit cost ledger (so nothing is a surprise)
+## 3. Cost posture (so nothing is a surprise)
 
-| Work | Cost | Alternative used so far |
-|---|---|---|
-| Static site build + deploy | ₹0 (bash + GitHub API) | already free |
-| Backend function deploy/test | integration credits | deferred until credits reset |
-| Connector use (email, etc.) | integration credits | deferred |
-| Automations / workflows | credits per run | none scheduled |
-| Builder app edits | builder credits (metered) | not used |
-| Chat turns | message credits | — |
+| Work | Cost today |
+|---|---|
+| Static site build + deploy | ₹0 (repo + git-based deploy to GitHub Pages) |
+| Docs, policies, copy | ₹0 (in-repo) |
+| Backend (bid intake, payments, notifications) | ₹0 today — nothing is connected at concept stage |
 
-Current status: integration credits exhausted this cycle (107.5/100). All
-platform-side connections wait for the reset; site-side work stays free.
+No platform vendor is locked in. When the campaign is cleared to connect, the
+backend provider is selected on price, India payment-rail fit and auction-model
+approval, and the full expected monthly cost is written here BEFORE anything is
+signed. Until then, nothing metered runs and nothing is owed.
